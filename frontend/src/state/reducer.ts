@@ -1,4 +1,4 @@
-import {Game, Login, Profile } from "../types"
+import {Game, Login, ProfileModel } from "../types"
 import { State } from "./state";
 
 
@@ -20,16 +20,21 @@ export type Action =
         payload: string;
     }
     | {
-        type: "GET_PROFILE";
-        payload: Profile;
-    }
-    | {
         type: "ADD_PROFILE";
-        payload: Profile;
+        payload: ProfileModel;
     }
     | {
         type: "ADD_LOGIN";
         payload: Login;
+    }
+    | {
+        type:"GET_USERS";
+        payload: Login[];
+    }
+    
+    |{
+        type: "GET_PROFILES";
+        payload: ProfileModel[];
     };
 
 export const reducer = (state: State, action: Action): State => {
@@ -39,7 +44,7 @@ export const reducer = (state: State, action: Action): State => {
                 ...state,
                 games: {
                     ...action.payload.reduce(
-                        (memo, game) => ({ ...memo, [game.GameId]: game }), {}),
+                        (memo, game) => ({ ...memo, [game.GameName]: game }), {}),
                     ...state.games
                 }
             };
@@ -48,7 +53,7 @@ export const reducer = (state: State, action: Action): State => {
                 ...state,
                 games: {
                     ...state.games,
-                    [action.payload.GameId]: action.payload
+                    [action.payload.GameName]: action.payload
                 }
             };
         case "LOGIN":
@@ -67,7 +72,7 @@ export const reducer = (state: State, action: Action): State => {
                 ...state,
                 login: {
                     ...state.login,
-                    [action.payload.email]: action.payload
+                    [action.payload.Email]: action.payload
                 }
             };
         case "ADD_PROFILE":
@@ -75,14 +80,29 @@ export const reducer = (state: State, action: Action): State => {
                 ...state,
                 profile: {
                     ...state.profile,
-                    [action.payload.Id]: action.payload
+                    [action.payload.Email]: action.payload
                 }
             };
-        case "GET_PROFILE":
+        case "GET_PROFILES":
             return {
                 ...state,
                 profile: {
-                    
+                    ...action.payload.reduce(
+                        (memo, profile) => ({ ...memo, [profile.Email]: profile }), 
+                        {}
+                        ),
+                    ...state.profile
+                }
+            };
+        case "GET_USERS":
+            return {
+                ...state,
+                login: {
+                    ...action.payload.reduce(
+                        (memo, login) => ({ ...memo, [login.Email]: login }), 
+                        {}
+                        ),
+                    ...state.login
                 }
             }
         default:

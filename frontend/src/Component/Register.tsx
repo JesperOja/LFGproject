@@ -1,7 +1,8 @@
 import React from "react";
 import { useStateValue } from "../state/state";
-import { v1 as uuid} from "uuid";
 import { SignUp } from '../services/loginService';
+import { addProfile } from '../services/profileService';
+import { ProfileModel } from "../types";
 
 interface Props {
     closeRegister: React.Dispatch<React.SetStateAction<boolean>>;
@@ -16,83 +17,112 @@ interface FormElements extends HTMLFormControlsCollection {
     age: HTMLInputElement;
     discord: HTMLInputElement;
     confirm_password: HTMLInputElement;
+    avatar: HTMLInputElement
 }
 
 interface YourFormElement extends HTMLFormElement {
     readonly elements: FormElements
 }
 
-const baseUrl = "https://localhost:44372/api/Auth";
-
-const Register: React.FC<Props> = ({closeRegister}) => {
-    const [{login}, dispatch] = useStateValue();
+const Register: React.FC<Props> = ({ closeRegister }) => {
+    const [, dispatch] = useStateValue();
+    const [myAvatar, setAvatar] = React.useState<File>()
 
     const handleCancel = () => {
         closeRegister(false);
     }
     const handleRegister = (e: React.FormEvent<YourFormElement>) => {
         e.preventDefault();
-        const id = uuid();
+        const date = new Date();
+        const today = date.getFullYear() +"."+ (date.getMonth()+1) +"."+ date.getDate();
+        
         const email = e.currentTarget.elements.email.value;
         const password = e.currentTarget.elements.password.value;
         const username = e.currentTarget.elements.username.value;
-        const fisrtname = e.currentTarget.elements.firstname.value;
+        const firstname = e.currentTarget.elements.firstname.value;
         const lastname = e.currentTarget.elements.lastname.value;
         const age = Number(e.currentTarget.elements.age.value);
         const discord = e.currentTarget.elements.discord.value;
         const confirm = e.currentTarget.elements.confirm_password.value;
+        //const avatar = new File(e.currentTarget.elements.avatar.value);
+        if(myAvatar){
+            const avatar = myAvatar;
+            console.log(avatar.name);
+        }
         
-        dispatch({type: "ADD_PROFILE", payload:{Id: id, Nickname: username, FirstName: fisrtname, LastName:lastname,
-        Age:age, DiscordNick:discord, Email:email}})
-        
-        SignUp({email: email, password: password, confirmPassword: confirm});
-        
-        dispatch({type:"ADD_LOGIN", payload:{email:email, password:password}})
+        const newProfile: ProfileModel = {
+            Email: email, 
+            Nickname: username, 
+            FirstName:firstname,
+            LastName: lastname, 
+            Age: age,
+            Avatar:"avatar", 
+            DiscordNick: discord,
+            JoiningDate: today
+        };
+
+        addProfile(newProfile);
+
+        dispatch({
+            type: "ADD_PROFILE", payload: newProfile
+        });
+
+        SignUp({ Email: email, Password: password, confirmPassword: confirm });
+
+        dispatch({ type: "ADD_LOGIN", payload: { Email: email, Password: password } })
         closeRegister(false);
+    }
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+    {
+        
+        const fileList: FileList = e.target.files as FileList;
+        console.log(fileList[0]);
+        setAvatar(fileList[0]);
     }
 
     return (
         <><h1>Register info</h1>
-        <form onSubmit={handleRegister}>
-            <div>Email: </div><input name='email'
-              id="email"
-              type="email"
-              placeholder="Write your email"
-            /><br />
-            <div>Password:</div> <input name='password'
-              id="password"
-              type="password"
-              placeholder="Password"
-            /><br />
-            <div>Confirm password:</div> <input name='confirm_password'
-              id="confim_password"
-              type="password"
-              placeholder="Confirm Password"
-            /><br />
+            <form onSubmit={handleRegister}>
+                <div>Email: </div><input name='email'
+                    id="email"
+                    type="email"
+                    placeholder="Write your email"
+                /><br />
+                <div>Password:</div> <input name='password'
+                    id="password"
+                    type="password"
+                    placeholder="Password"
+                /><br />
+                <div>Confirm password:</div> <input name='confirm_password'
+                    id="confim_password"
+                    type="password"
+                    placeholder="Confirm Password"
+                /><br />
+                <div>Username:</div> <input name='username' id='username'
+                    placeholder="Username" /> <br />
 
-            <div>Username:</div> <input name='username' id='username'
-            placeholder="Username" /> <br />
+                <div>First name:</div> <input name="firstname"
+                    id="firstname" placeholder="First name (optional)" /><br />
 
-            <div>First name:</div> <input name="firstname"
-            id="firstname" placeholder="First name (optional)" /><br />
+                <div>Last name:</div> <input name="lastname"
+                    id="lastname" placeholder="Last name (optional)" /> <br />
 
-            <div>Last name:</div> <input name="lastname"
-            id="lastname" placeholder="Last name (optional)" /> <br/>
+                <div>Age:</div> <input name="age" id="age" type="number"
+                    placeholder="Your age (optional)" /> <br />
 
-            <div>Age:</div> <input name="age" id="age" type="number"
-            placeholder="Your age (optional)" width="90%"/> <br/>
+                <div>Discord nick:</div> <input name="discord" id="discord"
+                    placeholder="Discord nick (optional)" /> <br />
 
-            <div>Discord nick:</div> <input name="discord" id="discord"
-            placeholder="Discord nick (optional)" /> <br/>
+<div>Avatar: <input type="file" accept="image/*" multiple={false} id="avatar" name="avatar" onChange={handleChange } />
+        </div>
+                <button type='submit'>Register</button><br />
+                <button onClick={handleCancel}>Cancel</button>
 
-            
-            <button type='submit'>Register</button><br />
-            <button onClick={handleCancel}>Cancel</button>
-            
 
             </form>
         </>
-    )
+    );
 }
 
 export default Register;

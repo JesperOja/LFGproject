@@ -1,5 +1,5 @@
 export interface Game {
-    GameId: number;
+    GameId?: number;
     GameName: string;
     NicknameIngame?: string;
     HoursPlayed?: number;
@@ -8,19 +8,20 @@ export interface Game {
     Comments?: string;
 }
 
-export interface Profile {
-    Id: string;
+export interface ProfileModel {
+    ProfileId?: string;
     Nickname: string;
     FirstName?: string;
     LastName?: string;
     Age?: number;
     DiscordNick?: string;
-    JoiningDate?: Date;
+    JoiningDate?: string;
+    Avatar?: string;
     Email: string;
 }
 
 export interface Login {
-    email: string;
-    password: string;
+    Email: string;
+    Password: string;
     confirmPassword?: string;
 }

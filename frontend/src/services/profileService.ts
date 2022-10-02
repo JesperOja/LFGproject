@@ -1,14 +1,11 @@
 import axios from "axios";
-import { Login } from "../types";
+import { ProfileModel } from "../types";
 
-const baseUrl = "https://localhost:44372/api/Auth";
+const baseUrl = "https://localhost:44372/api/Profile";
 
-
-export const SignIn = async (login: Login) => {
-    
+export const addProfile = async (profile: ProfileModel) => {
     try{
-        const{data: message} = await axios.post<Login>(`${baseUrl}/SignIn`, login)
-        console.log(message);
+        const {data: data} = await axios.post<ProfileModel>(baseUrl, profile);
         
     }catch(e: unknown){
         let errorMessage = 'Something went wrong.'
@@ -20,11 +17,11 @@ export const SignIn = async (login: Login) => {
     }
 }
 
-export const SignUp = async (signup: Login) => {
+export const getProfiles = async () => {
     try{
-        const{data: message} = await axios.post<Login>(`${baseUrl}/SignUp`, signup)
-        console.log(message);
+        const {data: data} = await axios.get<ProfileModel[]>(baseUrl);
         
+        return data;
     }catch(e: unknown){
         let errorMessage = 'Something went wrong.'
 		if (axios.isAxiosError(e) && e.response) {
