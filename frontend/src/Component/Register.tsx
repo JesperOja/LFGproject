@@ -51,14 +51,14 @@ const Register: React.FC<Props> = ({ closeRegister }) => {
         }
         
         const newProfile: ProfileModel = {
-            Email: email, 
-            Nickname: username, 
-            FirstName:firstname,
-            LastName: lastname, 
-            Age: age,
-            Avatar:"avatar", 
-            DiscordNick: discord,
-            JoiningDate: today
+            email: email, 
+            username: username, 
+            firstName:firstname,
+            lastName: lastname, 
+            age: age,
+            avatar:"avatar", 
+            discord: discord,
+            joiningDate: today
         };
 
         addProfile(newProfile);
@@ -67,9 +67,9 @@ const Register: React.FC<Props> = ({ closeRegister }) => {
             type: "ADD_PROFILE", payload: newProfile
         });
 
-        SignUp({ Email: email, Password: password, confirmPassword: confirm });
+        SignUp({ email: email, password: password, confirmPassword: confirm});
 
-        dispatch({ type: "ADD_LOGIN", payload: { Email: email, Password: password } })
+        dispatch({ type: "ADD_LOGIN", payload: { email: email, password: password } })
         closeRegister(false);
     }
 

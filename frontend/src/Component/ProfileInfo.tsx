@@ -2,18 +2,18 @@ import React from "react";
 import { useStateValue } from "../state/state";
 
 const ProfileInfo: React.FC = () => {
-    const [{profile, email}, dispatch] = useStateValue();
+    const [{profile, email}] = useStateValue();
 
-    const user = Object.values(profile).filter(prof => prof.Email === email);
+    const user = Object.values(profile).filter(prof => prof.email === email);
     const myProfile = user[0];
     return(
         <>
-            <h1 className="text-3xl">{myProfile.Nickname}</h1>
-            <div>First name: {myProfile.FirstName}</div>
-            <div>Last name: {myProfile.LastName}</div>
-            <div>Age: {myProfile.Age}</div>
-            <div>Discord Nick: {myProfile.DiscordNick}</div>
-            <div>Joining date: {myProfile.JoiningDate}</div>
+            <h1 className="text-3xl">{myProfile.username}</h1>
+            <div>First name: {myProfile.firstName}</div>
+            <div>Last name: {myProfile.lastName}</div>
+            <div>Age: {myProfile.age}</div>
+            <div>Discord Nick: {myProfile.discord}</div>
+            <div>Joining date: {myProfile.joiningDate}</div>
         </>
     )
 }

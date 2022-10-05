@@ -52,7 +52,7 @@ export const reducer = (state: State, action: Action): State => {
                 ...state,
                 games: {
                     ...action.payload.reduce(
-                        (memo, game) => ({ ...memo, [game.GameName]: game }), {}),
+                        (memo, game) => ({ ...memo, [game.name]: game }), {}),
                     ...state.games
                 }
             };
@@ -61,7 +61,7 @@ export const reducer = (state: State, action: Action): State => {
                 ...state,
                 games: {
                     ...state.games,
-                    [action.payload.GameName]: action.payload
+                    [action.payload.name]: action.payload
                 }
             };
         case "LOGIN":
@@ -80,7 +80,7 @@ export const reducer = (state: State, action: Action): State => {
                 ...state,
                 login: {
                     ...state.login,
-                    [action.payload.Email]: action.payload
+                    [action.payload.email]: action.payload
                 }
             };
         case "ADD_PROFILE":
@@ -88,7 +88,7 @@ export const reducer = (state: State, action: Action): State => {
                 ...state,
                 profile: {
                     ...state.profile,
-                    [action.payload.Email]: action.payload
+                    [action.payload.email]: action.payload
                 }
             };
         case "GET_PROFILES":
@@ -96,7 +96,7 @@ export const reducer = (state: State, action: Action): State => {
                 ...state,
                 profile: {
                     ...action.payload.reduce(
-                        (memo, profile) => ({ ...memo, [profile.Email]: profile }),
+                        (memo, profile) => ({ ...memo, [profile.email]: profile }),
                         {}
                     ),
                     ...state.profile
@@ -107,7 +107,7 @@ export const reducer = (state: State, action: Action): State => {
                 ...state,
                 login: {
                     ...action.payload.reduce(
-                        (memo, login) => ({ ...memo, [login.Email]: login }),
+                        (memo, login) => ({ ...memo, [login.email]: login }),
                         {}
                     ),
                     ...state.login
@@ -118,7 +118,7 @@ export const reducer = (state: State, action: Action): State => {
                 ...state,
                 posts:{
                     ...action.payload.reduce(
-                        (memo, post) => ({ ...memo, [post.Title]: post }),
+                        (memo, post) => ({ ...memo, [post.title]: post }),
                         {}
                     ),
                     ...state.posts
@@ -129,7 +129,7 @@ export const reducer = (state: State, action: Action): State => {
                 ...state,
                 posts: {
                     ...state.posts,
-                    [action.payload.Title]: action.payload
+                    [action.payload.title]: action.payload
                 }
             }
         default:

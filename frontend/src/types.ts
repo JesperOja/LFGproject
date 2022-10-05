@@ -1,35 +1,38 @@
 export interface Game {
-    GameId?: number;
-    GameName: string;
-    NicknameIngame?: string;
-    HoursPlayed?: number;
-    Rank?: string;
-    Server?: string;
-    Comments?: string;
+    id?: number;
+    name: string;
+    nicknameIngame?: string;
+    hours?: number;
+    rank?: string;
+    server?: string;
+    comments?: string;
+    profileId: number | undefined;
 }
 
 export interface ProfileModel {
-    ProfileId?: number;
-    Nickname: string;
-    FirstName?: string;
-    LastName?: string;
-    Age?: number;
-    DiscordNick?: string;
-    JoiningDate?: string;
-    Avatar?: string;
-    Email: string;
+    id?: number;
+    username: string;
+    firstName?: string;
+    lastName?: string;
+    age?: number;
+    discord?: string;
+    joiningDate?: string;
+    avatar?: string;
+    email: string;
+    games?: Game[];
+    posts?: Post[];
 }
 
 export interface Login {
-    Email: string;
-    Password: string;
+    email: string;
+    password: string;
     confirmPassword?: string;
 }
 
 export interface Post {
-    PostId?: number;
-    Title: string;
-    CreateDate: string;
-    Content: string;
-    PosterProfile: number | undefined;
+    id?: number;
+    title: string;
+    createDate: string;
+    content: string;
+    profileId: number | undefined;
 }

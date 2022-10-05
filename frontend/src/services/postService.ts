@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Post } from "../types";
 
-const baseUrl = "https://localhost:44372/api/Post";
+const baseUrl = "https://localhost:3001/api/Post";
 
 export const getPosts = async () => {
     try{

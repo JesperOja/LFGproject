@@ -10,6 +10,7 @@ const sequelize = new Sequelize(DATABASE_URL, {
     },
   });
 
+
 const connectToDatabase = async () => {
   try {
     await sequelize.authenticate()

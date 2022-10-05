@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Game } from "../types"
 
-const baseUrl = "https://localhost:44372/api/Game";
+const baseUrl = "https://localhost:3001/api/Game";
 
 export const getAll = async () => {
 	try {
