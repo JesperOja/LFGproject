@@ -9,8 +9,8 @@ const ProfileInfo: React.FC = () => {
     return(
         <>
             <h1 className="text-3xl">{myProfile.username}</h1>
-            <div>First name: {myProfile.firstName}</div>
-            <div>Last name: {myProfile.lastName}</div>
+            <div>First name: {myProfile.firstname}</div>
+            <div>Last name: {myProfile.lastname}</div>
             <div>Age: {myProfile.age}</div>
             <div>Discord Nick: {myProfile.discord}</div>
             <div>Joining date: {myProfile.joiningDate}</div>

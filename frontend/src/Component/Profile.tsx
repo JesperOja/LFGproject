@@ -54,15 +54,15 @@ const Profile: React.FC = () => {
     }, [dispatch]);
 
 
-    const user = Object.values(profile).filter(prof => prof.Email === email);
+    const user = Object.values(profile).filter(prof => prof.email === email);
 
     if (user.length !== 0) {
         if (addGame) {
             return (
-                <AddGame closeForm={setAddGame} />
+                <AddGame closeForm={setAddGame} currentUser={user[0]}/>
             )
         }
-        return (<div key={user[0].ProfileId}>
+        return (<div key={user[0].id}>
             <h1 className="text-3xl font-bold underline">
                 Hello world!
             </h1>

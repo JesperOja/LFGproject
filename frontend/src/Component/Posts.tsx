@@ -9,13 +9,13 @@ interface Props {
 const Posts: React.FC<Props> = ({currentUser}) => {
     const [{posts}] = useStateValue();
 
-    const myPosts = Object.values(posts).filter(post => Number(post.PosterProfile) === Number(currentUser.ProfileId));
+    const myPosts = Object.values(posts).filter(post => Number(post.profileId) === Number(currentUser.id));
     if(myPosts){
         return (
         <>
             <ul>
                 {myPosts.map(post =>
-                    <li key={post.PostId}>Title: {post.Title}, Content: {post.Content}</li>
+                    <li key={post.id}>Title: {post.title}, Content: {post.content}</li>
                     )}
             </ul>
         

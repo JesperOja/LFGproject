@@ -12,8 +12,8 @@ export interface Game {
 export interface ProfileModel {
     id?: number;
     username: string;
-    firstName?: string;
-    lastName?: string;
+    firstname?: string;
+    lastname?: string;
     age?: number;
     discord?: string;
     joiningDate?: string;

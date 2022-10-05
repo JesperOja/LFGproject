@@ -10,7 +10,7 @@ const Games: React.FC = () => {
         <>
             <ul>
             {myGames.map(game =>
-                    <li key={game.GameId}>{game.GameName}, Hours played: {game.HoursPlayed}, comment: {game.Comments} </li>
+                    <li key={game.id}>{game.name}, Hours played: {game.hours}, comment: {game.comments} </li>
                 )}
             </ul>
         </>

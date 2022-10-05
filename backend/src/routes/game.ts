@@ -9,7 +9,8 @@ router.get('/', async (_req,res) => {
 })
 
 router.post('/', async (req, res) => {
-    const newGame = await Game.create(req.body);
+    const profileId:number = req.body.profileId;
+    const newGame = await Game.create({...req.body, profileId: profileId});
     res.json(newGame);
 })
 

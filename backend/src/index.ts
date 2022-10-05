@@ -3,6 +3,7 @@ import cors from 'cors';
 import profileRouter from './routes/profile';
 import userRouter from './routes/user';
 import postRouter from './routes/post';
+import gameRouter from './routes/game';
 
 const { connectToDatabase } = require('./util/db')
 
@@ -15,6 +16,7 @@ app.use(express.json());
 app.use('/api/Profiles', profileRouter);
 app.use('/api/User', userRouter);
 app.use('/api/Post', postRouter);
+app.use('/api/Game', gameRouter);
 
 const start = async () => {
   await connectToDatabase()

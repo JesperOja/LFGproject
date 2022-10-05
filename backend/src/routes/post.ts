@@ -4,13 +4,14 @@ import  {Post} from '../models';
 const router = express.Router();
 
 router.get('/', async (_req,res) => {
-    const games = await Post.findAll();
-    res.json(games);
+    const posts = await Post.findAll();
+    res.json(posts);
 })
 
 router.post('/', async (req, res) => {
-    const newGame = await Post.create(req.body);
-    res.json(newGame);
+    const profileId:number = req.body.profileId;
+    const newPost = await Post.create({...req.body, profileId: profileId});
+    res.json(newPost);
 })
 
 export default router;

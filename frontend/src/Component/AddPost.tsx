@@ -32,10 +32,10 @@ const AddPost: React.FC<Props> = ({ currentUser }) => {
         const content = e.currentTarget.elements.content.value;
 
         const newPost:Post = {
-            Title: title,
-            CreateDate: today,
-            Content: content,
-            PosterProfile: currentUser.ProfileId
+            title: title,
+            createDate: today,
+            content: content,
+            profileId: currentUser.id
         }
 
         addPost(newPost);

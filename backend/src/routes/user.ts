@@ -3,7 +3,7 @@ import { User } from "../models";
 
 const router = express.Router();
 
-router.post('/SignUp', async (req,res) => {
+router.post('/Signup', async (req,res) => {
     const {email, password} = req.body;
     const user = await User.create({
         email: email,

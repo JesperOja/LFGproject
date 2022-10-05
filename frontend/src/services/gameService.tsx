@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Game } from "../types"
 
-const baseUrl = "https://localhost:3001/api/Game";
+const baseUrl = "https://immense-cove-02108.herokuapp.com/api/Game";
 
 export const getAll = async () => {
 	try {

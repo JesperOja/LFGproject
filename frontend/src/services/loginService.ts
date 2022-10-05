@@ -1,14 +1,15 @@
 import axios from "axios";
+import { url } from "inspector";
 import { Login } from "../types";
 
-const signUrl = "https://localhost:3001/api/SignUp";
-const loginUrl ="https://localhost:3001/api/Login";
+const Url = "https://localhost:3001/api/User";
+
 
 
 export const SignIn = async (login: Login) => {
     
     try{
-        const{data: message} = await axios.post<Login>(`${loginUrl}`, login)
+        const{data: message} = await axios.post<Login>(`${Url}/Login`, login)
         console.log(message);
         
     }catch(e: unknown){
@@ -23,7 +24,7 @@ export const SignIn = async (login: Login) => {
 
 export const SignUp = async (signup: Login) => {
     try{
-        const{data: message} = await axios.post<Login>(`${signUrl}`, signup)
+        const{data: message} = await axios.post<Login>(`${Url}/SignUp`, signup)
         console.log(message);
         
     }catch(e: unknown){

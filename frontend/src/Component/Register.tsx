@@ -53,8 +53,8 @@ const Register: React.FC<Props> = ({ closeRegister }) => {
         const newProfile: ProfileModel = {
             email: email, 
             username: username, 
-            firstName:firstname,
-            lastName: lastname, 
+            firstname:firstname,
+            lastname: lastname, 
             age: age,
             avatar:"avatar", 
             discord: discord,
