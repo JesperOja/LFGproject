@@ -1,4 +1,4 @@
-import { Game, Login, Post, ProfileModel } from "../types"
+import { Game, User, Post, ProfileModel } from "../types"
 import { State } from "./state";
 
 
@@ -21,11 +21,11 @@ export type Action =
     }
     | {
         type: "ADD_LOGIN";
-        payload: Login;
+        payload: User;
     }
     | {
         type: "GET_USERS";
-        payload: Login[];
+        payload: User[];
     }
 
     | {
@@ -52,7 +52,7 @@ export const reducer = (state: State, action: Action): State => {
                 ...state,
                 games: {
                     ...action.payload.reduce(
-                        (memo, game) => ({ ...memo, [game.name]: game }), {}),
+                        (memo, game) => ({ ...memo, [game.GameId]: game }), {}),
                     ...state.games
                 }
             };
@@ -61,7 +61,7 @@ export const reducer = (state: State, action: Action): State => {
                 ...state,
                 games: {
                     ...state.games,
-                    [action.payload.name]: action.payload
+                    [action.payload.GameId]: action.payload
                 }
             };
         case "LOGIN":
@@ -78,9 +78,9 @@ export const reducer = (state: State, action: Action): State => {
         case "ADD_LOGIN":
             return {
                 ...state,
-                login: {
-                    ...state.login,
-                    [action.payload.email]: action.payload
+                user: {
+                    ...state.user,
+                    [action.payload.Email]: action.payload
                 }
             };
         case "ADD_PROFILE":
@@ -88,7 +88,7 @@ export const reducer = (state: State, action: Action): State => {
                 ...state,
                 profile: {
                     ...state.profile,
-                    [action.payload.email]: action.payload
+                    [action.payload.Email]: action.payload
                 }
             };
         case "GET_PROFILES":
@@ -96,7 +96,7 @@ export const reducer = (state: State, action: Action): State => {
                 ...state,
                 profile: {
                     ...action.payload.reduce(
-                        (memo, profile) => ({ ...memo, [profile.email]: profile }),
+                        (memo, profile) => ({ ...memo, [profile.Email]: profile }),
                         {}
                     ),
                     ...state.profile
@@ -105,12 +105,12 @@ export const reducer = (state: State, action: Action): State => {
         case "GET_USERS":
             return {
                 ...state,
-                login: {
+                user: {
                     ...action.payload.reduce(
-                        (memo, login) => ({ ...memo, [login.email]: login }),
+                        (memo, login) => ({ ...memo, [login.Email]: login }),
                         {}
                     ),
-                    ...state.login
+                    ...state.user
                 }
             }
         case "GET_POSTS":
@@ -118,7 +118,7 @@ export const reducer = (state: State, action: Action): State => {
                 ...state,
                 posts:{
                     ...action.payload.reduce(
-                        (memo, post) => ({ ...memo, [post.title]: post }),
+                        (memo, post) => ({ ...memo, [post.PostId]: post }),
                         {}
                     ),
                     ...state.posts
@@ -128,8 +128,8 @@ export const reducer = (state: State, action: Action): State => {
             return {
                 ...state,
                 posts: {
-                    ...state.posts,
-                    [action.payload.title]: action.payload
+                    [action.payload.PostId]: action.payload,
+                    ...state.posts
                 }
             }
         default:
