@@ -17,12 +17,12 @@ interface YourFormElement extends HTMLFormElement {
 }
 
 interface Props {
-    closeForm: React.Dispatch<React.SetStateAction<boolean>>;
-    currentUser: ProfileModel
+    closeForm: () => void;
+    currentUser: ProfileModel;
 }
 
 const AddGame: React.FC<Props> = ({ closeForm, currentUser }) => {
-    const [, dispatch] = useStateValue();
+    const [{games}, dispatch] = useStateValue();
 
     const handleSubmit = (e: React.FormEvent<YourFormElement>) => {
         e.preventDefault();
@@ -33,51 +33,54 @@ const AddGame: React.FC<Props> = ({ closeForm, currentUser }) => {
         const rank = e.currentTarget.elements.Rank.value;
         const server = e.currentTarget.elements.Server.value;
         const comment = e.currentTarget.elements.Comment.value;
-
+        const id = Object.values(games).length +5000;
+       
         const newGame: Game = {
-            name: name,
-            nicknameIngame: nick,
-            hours: hours,
-            rank: rank,
-            server: server,
-            comments: comment,
-            profileId: currentUser.id
+            GameId: id,
+            GameName: name,
+            NicknameIngame: nick,
+            HoursPlayed: hours,
+            Rank: rank,
+            Server: server,
+            Comments: comment,
+            ProfileId: Number(currentUser.ProfileId)
         }
+
 
         addGame(newGame);
         dispatch({ type: "ADD_GAME", payload: newGame });
-        closeForm(false);
+        closeForm();
     }
     const handleCancel = () => {
-        closeForm(false);
+        closeForm();
     }
 
     return (
         <>
             <form onSubmit={handleSubmit}>
-                <div>Name: </div><input name='GameName'
+                <label>Name: </label><input name='GameName'
                     id="GameName"
                     placeholder="Game name"
                 /><br />
-                <div>Nickname ingame:</div> <input name='NicknameIngame'
+                <label>Nickname ingame:</label> <input name='NicknameIngame'
                     id="NicknameIngame"
                     placeholder="Nickname Ingame"
                 /><br />
-                <div>HoursPlayed:</div> <input name='HoursPlayed'
+                <label>HoursPlayed:</label> <input name='HoursPlayed'
                     id="HoursPlayed"
-
                     placeholder="Hours Played"
                 /><br />
 
-                <div>Rank:</div> <input name='Rank' id='Rank'
+                <label>Rank:</label> <input name='Rank' id='Rank'
                     placeholder="Rank (optional)" /> <br />
 
-                <div>Server:</div> <input name="Server"
+                <label>Server:</label> <input name="Server"
                     id="Server" placeholder="Server you play (optional)" /><br />
 
-                <div>Comments:</div> <input name="Comment"
-                    id="Comment" placeholder="Comments about the game (optional)" /> <br />
-
+                <label>Comments: <br />
+                    <textarea name="Comment" rows={4} cols={40}
+                        id="Comment" placeholder="Comments about the game (optional)" /> <br />
+                </label>
                 <button type='submit'>Add Game</button><br />
                 <button onClick={handleCancel}>Cancel</button>
             </form>
