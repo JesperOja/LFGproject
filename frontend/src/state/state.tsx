@@ -1,12 +1,12 @@
 import React, { createContext, useContext, useReducer } from "react";
-import { Game, User, ProfileModel, Post } from "../types";
+import { Game, Login, ProfileModel, Post } from "../types";
 import { Action } from "./reducer";
 
 export interface State {
     games: { [GameId: number]: Game }
     profile: { [ProfileId: number]: ProfileModel}
     email: string,
-    user: {[Email: string]: User},
+    login: {[Email: string]: Login},
     posts: {[PostID: number] : Post}
 }
 
@@ -14,7 +14,7 @@ const initialState: State = {
     games: {},
     profile: {},
     email: "",
-    user: {},
+    login: {},
     posts: {}
 }
 
