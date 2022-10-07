@@ -2,7 +2,6 @@ import React from "react";
 import { useStateValue } from "../state/state";
 import { SignIn } from '../services/loginService';
 import { rootNavigate } from "./CustomRouter";
-import { Message } from "../types";
 
 interface FormElements extends HTMLFormControlsCollection {
     email: HTMLInputElement;
@@ -22,16 +21,10 @@ const Login: React.FC = () => {
         const email = e.currentTarget.elements.email.value;
         const password = e.currentTarget.elements.password.value;
 
-        SignIn({ Email: email, Password: password }).then(mess => {
-            const message: Message = mess as Message;
-
-            if (message.IsSuccess) {
+        SignIn({ email: email, password: password }).then(mess => {
                 dispatch({ type: "LOGIN", payload: email });
-                dispatch({ type: "ADD_LOGIN", payload: { Email: email, Password: password } });
+                dispatch({ type: "ADD_LOGIN", payload: { email: email, password: password } });
                 rootNavigate("/");
-            } else {
-                window.alert(message.Message);
-            }
         });
 
         e.currentTarget.elements.password.value = '';

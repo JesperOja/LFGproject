@@ -5,13 +5,13 @@ import { getPosts } from "../services/postService";
 import { getProfiles } from "../services/profileService";
 import { getUsers } from "../services/userService";
 import { useStateValue } from "../state/state";
-import { Game, Post, ProfileModel, User } from "../types";
+import { Game, Post, ProfileModel, Login } from "../types";
 
 const HomePage: React.FC = () => {
     const [{ posts, profile }, dispatch] = useStateValue();
 
     const allPosts = Object.values(posts).concat();
-    allPosts.sort((a, b) => Number(b.PostId) - Number(a.PostId));
+    allPosts.sort((a, b) => Number(b.id) - Number(a.id));
     const allProfiles = Object.values(profile).concat();
 
     React.useEffect(() => {
@@ -21,7 +21,7 @@ const HomePage: React.FC = () => {
             dispatch({ type: "GET_PROFILES", payload: profiles });
         });
         getUsers().then(user => {
-            const users: User[] = user as User[];
+            const users: Login[] = user as Login[];
 
             dispatch({ type: "GET_USERS", payload: users });
         });
@@ -34,7 +34,7 @@ const HomePage: React.FC = () => {
 
         getPosts().then(post => {
             const posts: Post[] = post as Post[];
-            posts.sort((a, b) => Number(b.PostId) - Number(a.PostId));
+            posts.sort((a, b) => Number(b.id) - Number(a.id));
             dispatch({ type: "GET_POSTS", payload: posts });
         })
 
@@ -54,9 +54,9 @@ const HomePage: React.FC = () => {
                 Posts:
                 <ul>
                     {allPosts.map(post =>
-                        <li key={Number(post.PostId)}>title: {post.Title} <br />
-                            Content: {post.Content} <br />
-                            By: <Link to={`/profile/${Number(allProfiles.find(prof => Number(prof.ProfileId) === Number(post.PosterProfile))?.ProfileId)}`}>{allProfiles.find(prof => Number(prof.ProfileId) === Number(post.PosterProfile))?.Nickname}</Link>
+                        <li key={Number(post.id)}>title: {post.title} <br />
+                            Content: {post.content} <br />
+                            By: <Link to={`/profile/${Number(allProfiles.find(prof => Number(prof.id) === Number(post.profileId))?.id)}`}>{allProfiles.find(prof => Number(prof.id) === Number(post.profileId))?.username}</Link>
                             <br />
                             <br />/ /</li>
                     )}

@@ -7,29 +7,29 @@ const GameInfo: React.FC = () => {
     const [{games, profile}] = useStateValue();
 
     const id = useParams().id as string;
-    const gameInfo = Object.values(games).find(game => Number(game.GameId) === Number(id)) as Game;
+    const gameInfo = Object.values(games).find(game => Number(game.id) === Number(id)) as Game;
     
-    const thisUser: ProfileModel = Object.values(profile).find(prof => Number(prof.ProfileId) === Number(gameInfo.ProfileId)) as ProfileModel;
+    const thisUser: ProfileModel = Object.values(profile).find(prof => Number(prof.id) === Number(gameInfo.profileId)) as ProfileModel;
 
     return ( 
         <>
             <h1 className="text-3xl font-bold underline">
-                {gameInfo.GameName}
+                {gameInfo.name}
             </h1>
             <div>
-                Hours played: {gameInfo.HoursPlayed}
+                Hours played: {gameInfo.hours}
             </div>
             <div>
-                Rank: {gameInfo.Rank}
+                Rank: {gameInfo.rank}
             </div>
             <div>
-                Server: {gameInfo.Server}
+                Server: {gameInfo.server}
             </div>
             <div>
-                Nickname ingame: {gameInfo.NicknameIngame}
+                Nickname ingame: {gameInfo.nicknameIngame}
             </div>
             <div>
-                Comments about the game: {gameInfo.Comments} by <Link to={`/profile/${Number(thisUser.ProfileId)}`}>{thisUser.Nickname}</Link>
+                Comments about the game: {gameInfo.comments} by <Link to={`/profile/${Number(thisUser.id)}`}>{thisUser.username}</Link>
             </div>
         </>
     )

@@ -36,14 +36,14 @@ const AddGame: React.FC<Props> = ({ closeForm, currentUser }) => {
         const id = Object.values(games).length +5000;
        
         const newGame: Game = {
-            GameId: id,
-            GameName: name,
-            NicknameIngame: nick,
-            HoursPlayed: hours,
-            Rank: rank,
-            Server: server,
-            Comments: comment,
-            ProfileId: Number(currentUser.ProfileId)
+            id: id,
+            name: name,
+            nicknameIngame: nick,
+            hours: hours,
+            rank: rank,
+            server: server,
+            comments: comment,
+            profileId: Number(currentUser.id)
         }
 
 

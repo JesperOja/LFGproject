@@ -32,11 +32,11 @@ const AddPost: React.FC<Props> = ({ currentUser, toggleNewPost }) => {
         const id = Object.values(posts).concat().length+5000;
 
         const newPost: Post = {
-            PostId: id,
-            Title: title,
-            CreateDate: today,
-            Content: content,
-            PosterProfile: Number(currentUser.ProfileId)
+            id: id,
+            title: title,
+            createDate: today,
+            content: content,
+            profileId: Number(currentUser.id)
         }
 
         addPost(newPost);
@@ -44,7 +44,7 @@ const AddPost: React.FC<Props> = ({ currentUser, toggleNewPost }) => {
 
         getPosts().then(post => {
             const posts: Post[] = post as Post[];
-            posts.sort((a, b) => Number(b.PostId) - Number(a.PostId));
+            posts.sort((a, b) => Number(b.id) - Number(a.id));
             dispatch({ type: "GET_POSTS", payload: posts });
         })
 

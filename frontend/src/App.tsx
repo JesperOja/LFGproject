@@ -3,7 +3,7 @@ import Profile from './Component/Profile';
 import LoginPage from './Component/LoginPage';
 import './App.css';
 import { useStateValue } from './state/state';
-import { User, ProfileModel } from './types';
+import { Login, ProfileModel } from './types';
 import { getUsers } from './services/userService';
 import { getProfiles } from './services/profileService';
 import {
@@ -19,7 +19,7 @@ const App: React.FC = () => {
 
   useEffect(() => {
     getUsers().then(user => {
-      const users: User[] = user as User[];
+      const users: Login[] = user as Login[];
 
       dispatch({ type: "GET_USERS", payload: users });
     });
