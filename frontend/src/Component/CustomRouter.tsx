@@ -4,7 +4,7 @@ import { createBrowserHistory } from "history";
 
 const history = createBrowserHistory();
 
-const CustomRouter: FC<PropsWithChildren> = ({ children, ...props }) => {
+const CustomRouter: React.FC<PropsWithChildren> = ({ children, ...props }) => {
     return (
         <HistoryRouter history={history} {...props}>
             {children}

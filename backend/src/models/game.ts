@@ -5,10 +5,10 @@ export class Game extends Model<InferAttributes<Game>, InferCreationAttributes<G
     declare id: CreationOptional<number>;
     declare name: string;
     declare nicknameIngame: string | null;
-    declare hoursPlayes: number | null;
+    declare hours: number | null;
     declare rank: string | null;
     declare server: string | null;
-    declare comment: string | null;
+    declare comments: string | null;
 }
 
 Game.init({
@@ -24,7 +24,7 @@ Game.init({
     nicknameIngame:{
         type: DataTypes.STRING
     },
-    hoursPlayes:{
+    hours:{
         type: DataTypes.STRING
     },
     rank: {
@@ -33,7 +33,7 @@ Game.init({
     server:{
         type: DataTypes.STRING
     },
-    comment:{
+    comments:{
         type: DataTypes.STRING
     } 
 }, {

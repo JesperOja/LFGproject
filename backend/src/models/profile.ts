@@ -10,6 +10,7 @@ export class Profile extends Model<InferCreationAttributes<Profile>, InferAttrib
     declare discord: string | null;
     declare joiningDate: string;
     declare email: string;
+    
 }
 
 Profile.init({
@@ -44,7 +45,8 @@ Profile.init({
     },
     email: {
         type: DataTypes.STRING
-    }
+    },
+    
 }, {
     sequelize,
     underscored: true,

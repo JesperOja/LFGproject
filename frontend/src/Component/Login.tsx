@@ -33,40 +33,34 @@ const Login: React.FC = () => {
 
     return (
         <div>
-            <img className='mx-auto h-[200px] -mt-[240px] mb-[40px] object-contain' src='/images/logo.png' alt='logo' />
-            <div className='h-[300px] w-3/5 m-auto'>
+            
+            <div >
 
-                <div className='font-semibold subpixel-antialiased'>
+                <div >
                     LOGIN
                 </div>
 
                 {/* Login form */}
-                <form id='login' onSubmit={handleLogin} className='h-full flex flex-col relative pt-2 pb-8'>
-                    <label className='mt-4'>
+                <form id='login' onSubmit={handleLogin} >
+                    <label >
                         E-mail
                         <input name='email' id='email'
                             placeholder='Email'
                             type='name'
-                            className='w-full border-solid border-2 border-gray-300 rounded-lg py-2 px-4 mt-1' />
+                            />
                     </label>
 
-                    <label className='mt-4'>
+                    <label >
                         Password
                         <input name='password' id='password'
                             type='password'
                             placeholder='Password'
-                            className='w-full border-solid border-2 border-gray-300 rounded-lg py-2 px-4 mt-1' />
+                            />
                     </label>
 
-                    <button className='rounded-full bg-primary py-2 text-white w-full uppercase font-semibold subpixel-antialiased font-sm mt-6 mb-9' type='submit'>
+                    <button type='submit'>
                         Login
                     </button>
-
-                    <div className='text-sm absolute bottom-0 w-full'>
-                        <p className='p-1.5 bg-white border-solid border border-gray-300 w-fit rounded-full mx-auto'>
-                            OR
-                        </p>
-                    </div>
 
                     <hr className='border-gray-300'></hr>
                 </form>

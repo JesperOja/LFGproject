@@ -20,7 +20,7 @@ const App: React.FC = () => {
   useEffect(() => {
     getUsers().then(user => {
       const users: Login[] = user as Login[];
-
+      console.log(user);
       dispatch({ type: "GET_USERS", payload: users });
     });
 

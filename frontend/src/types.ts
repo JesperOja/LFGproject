@@ -6,7 +6,7 @@ export interface Game {
     rank?: string;
     server?: string;
     comments?: string;
-    profileId: number | undefined;
+    profileId: number;
 }
 
 export interface ProfileModel {
@@ -35,4 +35,14 @@ export interface Post {
     createDate: string;
     content: string;
     profileId: number | undefined;
+    likes?: number;
+    dislikes?: number;
+}
+
+export interface Comment {
+    id: number;
+    comment: string;
+    postId: number;
+    posterId: number;
+    createDate: string;
 }

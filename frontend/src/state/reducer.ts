@@ -92,6 +92,9 @@ export const reducer = (state: State, action: Action): State => {
                 }
             };
         case "GET_PROFILES":
+            if(action.payload === undefined){
+                return {...state};
+            }else{
             return {
                 ...state,
                 profile: {
@@ -102,7 +105,11 @@ export const reducer = (state: State, action: Action): State => {
                     ...state.profile
                 }
             };
+        }
         case "GET_USERS":
+            if(action.payload === undefined){
+                return {...state};
+            }else{
             return {
                 ...state,
                 login: {
@@ -112,7 +119,8 @@ export const reducer = (state: State, action: Action): State => {
                     ),
                     ...state.login
                 }
-            }
+            };
+        }
         case "GET_POSTS":
             return{
                 ...state,

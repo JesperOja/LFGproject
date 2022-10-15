@@ -66,31 +66,31 @@ import React from "react";
                 )
             }
             return (
-                <div key={user[0].id} className='min-h-[calc(100vh-65px)] z-10 bg-darkBackground text-gray-200'>
+                <div key={user[0].id} >
     
                     <ProfileInfo currentUser={user[0]}/>
     
-                    <div id='game-section' className='px-10 pb-10 pt-8 bg-white text-gray-600 overflow-x-auto'>
-                        <div className='font-bold text-3xl pb-7 w-full flex w-full'>
+                    <div id='game-section' >
+                        <div >
                             <h1>Games</h1>
-                            <hr className='border-2 border-gray-300 w-full mt-5 ml-5 rounded-md'></hr>
+                            <hr ></hr>
                         </div>
                         <div className='flex w-fit'>
                             <Games currentUser={user[0]} />
-                            <div className='ring-4 hover:ring-4 hover:ring-primary hover:ring-offset-4 rounded-lg ring-darkBackground flex flex-col h-96 w-60 mx-2 relative text-white bg-darkBackground '>
-                                <button onClick={addNewGame} className='rounded-lg w-full h-full font-bold text-7xl bg-darkBackground text-white hover:bg-primary'>+</button>
+                            <div >
+                                <button onClick={addNewGame} >Add Game</button>
                             </div>
                         </div>
                     </div>
     
-                    <div className='px-10 py-10'>
-                        <div className='font-bold text-3xl pb-7 flex w-full'>
+                    <div >
+                        <div >
                             <h1>Posts</h1>
-                            <hr className='border-2 border-gray-300 w-full mt-5 mx-5 rounded-md'></hr>
-                            <button onClick={togglePost} className='rounded-full bg-primary text-sm px-4 py-2 w-28'>New Post</button>
+                            <hr ></hr>
+                            <button onClick={togglePost} >New Post</button>
                         </div>
     
-                        <div className='text-gray-600'>
+                        <div >
                             {newPost && <AddPost currentUser={user[0]} toggleNewPost={togglePost} />}
                         </div>
                         <Posts currentUser={user[0]} />

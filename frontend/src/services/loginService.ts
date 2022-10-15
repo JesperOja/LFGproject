@@ -1,8 +1,7 @@
 import axios from "axios";
-import { url } from "inspector";
 import { Login } from "../types";
 
-const Url = "https://localhost:3001/api/User";
+const Url = "http://localhost:3001/api/user";
 
 
 

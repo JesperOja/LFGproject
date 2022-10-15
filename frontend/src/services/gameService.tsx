@@ -1,11 +1,14 @@
 import axios from "axios";
+import { json } from "react-router-dom";
 import { Game } from "../types"
 
-const baseUrl = "https://immense-cove-02108.herokuapp.com/api/Game";
+//const baseUrl = "https://immense-cove-02108.herokuapp.com/api/Game";
+const baseUrl = "http://localhost:3001/api/game";
 
 export const getAll = async () => {
 	try {
-		const { data: games } = await axios.get<Game[]>(baseUrl)
+		const { data: games } = await axios.get<Game[]>(baseUrl);
+		JSON.stringify(games);
 		return games
 	} catch (error: unknown) {
 		let errorMessage = 'Something went wrong.'
@@ -19,7 +22,7 @@ export const getAll = async () => {
 
 export const addGame = async (game: Game) => {
 	try {
-		const { data: data } = await axios.post<Game>(baseUrl, game)
+		await axios.post<Game>(baseUrl, game)
 		return game;
 	} catch (error: unknown) {
 		let errorMessage = 'Something went wrong.'

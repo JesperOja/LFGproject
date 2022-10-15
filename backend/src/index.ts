@@ -13,10 +13,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.use('/api/Profiles', profileRouter);
-app.use('/api/User', userRouter);
-app.use('/api/Post', postRouter);
-app.use('/api/Game', gameRouter);
+app.use('/api/profile', profileRouter);
+app.use('/api/user', userRouter);
+app.use('/api/post', postRouter);
+app.use('/api/game', gameRouter);
 
 const start = async () => {
   await connectToDatabase()

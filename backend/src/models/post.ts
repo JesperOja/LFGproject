@@ -6,6 +6,8 @@ export class Post extends Model<InferAttributes<Post>, InferCreationAttributes<P
     declare title: string;
     declare createDate: string;
     declare content: string;
+    declare likes: number;
+    declare dislikes: number;
 }
 
 Post.init({
@@ -22,6 +24,12 @@ Post.init({
     },
     content:{
         type: DataTypes.STRING
+    },
+    likes: {
+        type: DataTypes.INTEGER
+    },
+    dislikes: {
+        type: DataTypes.INTEGER
     }
 },{
     sequelize,
