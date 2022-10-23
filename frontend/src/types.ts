@@ -1,5 +1,5 @@
 export interface Game {
-    id: number;
+    id?: number;
     name: string;
     nicknameIngame?: string;
     hours?: number;
@@ -30,19 +30,20 @@ export interface Login {
 }
 
 export interface Post {
-    id: number;
+    id?: number;
     title: string;
-    createDate: string;
+    createdAt?: string;
     content: string;
-    profileId: number | undefined;
+    profileId: number;
     likes?: number;
     dislikes?: number;
+    comments?: Comment[];
 }
 
 export interface Comment {
-    id: number;
+    id?: number;
     comment: string;
     postId: number;
     posterId: number;
-    createDate: string;
+    createdAt?: string;
 }

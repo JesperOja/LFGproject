@@ -4,7 +4,7 @@ import { Model, DataTypes, InferCreationAttributes, CreationOptional, InferAttri
 export class Post extends Model<InferAttributes<Post>, InferCreationAttributes<Post>>{
     declare id: CreationOptional<number>;
     declare title: string;
-    declare createDate: string;
+    
     declare content: string;
     declare likes: number;
     declare dislikes: number;
@@ -17,23 +17,25 @@ Post.init({
         primaryKey: true
     },
     title:{
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        allowNull: false
     },
-    createDate: {
-        type: DataTypes.STRING
-    },
+    
     content:{
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        allowNull: false
     },
     likes: {
-        type: DataTypes.INTEGER
+        type: DataTypes.INTEGER,
+        defaultValue: 0
     },
     dislikes: {
-        type: DataTypes.INTEGER
+        type: DataTypes.INTEGER,
+        defaultValue: 0
     }
 },{
     sequelize,
     modelName: 'post',
     underscored: true,
-    timestamps: false
+    timestamps: true,
 })

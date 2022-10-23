@@ -5,14 +5,17 @@ import { getPosts } from "../services/postService";
 import { getProfiles } from "../services/profileService";
 import { getUsers } from "../services/userService";
 import { useStateValue } from "../state/state";
-import { Game, Post, ProfileModel, Login } from "../types";
+import { Comment, Post, ProfileModel, Login } from "../types";
+import Comments from "./Comments";
+import CSS from 'csstype';
+import { getComments } from "../services/commentService";
+import Posts from "./Posts";
 
 const HomePage: React.FC = () => {
-    const [{ posts, profile }, dispatch] = useStateValue();
+    const [{ email, profile }, dispatch] = useStateValue();
 
-    const allPosts = Object.values(posts).concat();
-    allPosts.sort((a, b) => Number(b.id) - Number(a.id));
-    const allProfiles = Object.values(profile).concat();
+    
+    const thisUser = Object.values(profile).concat();
 
     React.useEffect(() => {
         getProfiles().then(data => {
@@ -26,11 +29,11 @@ const HomePage: React.FC = () => {
             dispatch({ type: "GET_USERS", payload: users });
         });
 
-        getAll().then(game => {
-            const games: Game[] = game as Game[];
+        getComments().then(comment => {
+            const comments = comment as Comment[];
 
-            dispatch({ type: "GET_GAME_LIST", payload: games });
-        });
+            dispatch({type: "GET_COMMENTS", payload: comments});
+        })
 
         getPosts().then(post => {
             const posts: Post[] = post as Post[];
@@ -45,6 +48,10 @@ const HomePage: React.FC = () => {
         }
     }, [dispatch]);
 
+    const contentStyle: CSS.Properties = {
+        whiteSpace: "pre-line"
+    }
+
     return (
         <>
             <h1 className="text-3xl font-bold underline">
@@ -52,15 +59,7 @@ const HomePage: React.FC = () => {
             </h1>
             <div>
                 Posts:
-                <ul>
-                    {allPosts.map(post =>
-                        <li key={Number(post.id)}>title: {post.title} <br />
-                            Content: {post.content} <br />
-                            By: <Link to={`/profile/${Number(allProfiles.find(prof => Number(prof.id) === Number(post.profileId))?.id)}`}>{allProfiles.find(prof => Number(prof.id) === Number(post.profileId))?.username}</Link>
-                            <br />
-                            <br />/ /</li>
-                    )}
-                </ul>
+                <Posts currentUser={undefined} />
             </div>
         </>
     )

@@ -22,7 +22,7 @@ interface Props {
 }
 
 const AddGame: React.FC<Props> = ({ closeForm, currentUser }) => {
-    const [{games}, dispatch] = useStateValue();
+    const [, dispatch] = useStateValue();
 
     const handleSubmit = (e: React.FormEvent<YourFormElement>) => {
         e.preventDefault();
@@ -33,10 +33,8 @@ const AddGame: React.FC<Props> = ({ closeForm, currentUser }) => {
         const rank = e.currentTarget.elements.Rank.value;
         const server = e.currentTarget.elements.Server.value;
         const comment = e.currentTarget.elements.Comment.value;
-        const id = Object.values(games).length +5000;
-       
+        
         const newGame: Game = {
-            id: id,
             name: name,
             nicknameIngame: nick,
             hours: hours,

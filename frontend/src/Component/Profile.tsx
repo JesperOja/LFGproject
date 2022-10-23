@@ -1,7 +1,7 @@
 import React from "react";
     import { useStateValue } from "../state/state";
     import { getProfiles } from "../services/profileService";
-    import { Game, Login, Post, ProfileModel } from "../types";
+    import { Comment, Game, Login, Post, ProfileModel } from "../types";
     import { getUsers } from "../services/userService";
     import AddGame from "./AddGame";
     import { getAll } from "../services/gameService";
@@ -10,6 +10,7 @@ import React from "react";
     import AddPost from "./AddPost";
     import { getPosts } from "../services/postService";
     import Posts from "./Posts";
+import { getComments } from "../services/commentService";
     
     const Profile: React.FC = () => {
         const [{ profile, email }, dispatch] = useStateValue();
@@ -47,6 +48,12 @@ import React from "react";
                 const posts: Post[] = post as Post[];
                 posts.sort((a, b) => Number(b.id) - Number(a.id));
                 dispatch({ type: "GET_POSTS", payload: posts });
+            });
+
+            getComments().then(comment => {
+                const comments = comment as Comment[];
+
+                dispatch({type: "GET_COMMENTS", payload: comments});
             })
             
             const loggedUserJSON = window.localStorage.getItem('loggedUser');

@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useReducer } from "react";
-import { Game, Login, ProfileModel, Post } from "../types";
+import { Game, Login, ProfileModel, Post, Comment } from "../types";
 import { Action } from "./reducer";
 
 export interface State {
@@ -7,7 +7,8 @@ export interface State {
     profile: { [ProfileId: number]: ProfileModel}
     email: string,
     login: {[Email: string]: Login},
-    posts: {[PostID: number] : Post}
+    posts: {[PostID: number] : Post},
+    comments: {[id: number] : Comment}
 }
 
 const initialState: State = {
@@ -15,7 +16,8 @@ const initialState: State = {
     profile: {},
     email: "",
     login: {},
-    posts: {}
+    posts: {},
+    comments: {}
 }
 
 export const StateContext = createContext<[State, React.Dispatch<Action>]>([

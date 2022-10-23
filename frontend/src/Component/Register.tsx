@@ -3,9 +3,10 @@ import { useStateValue } from "../state/state";
 import { SignUp } from '../services/loginService';
 import { addProfile } from '../services/profileService';
 import { ProfileModel } from "../types";
+import { rootNavigate } from "./CustomRouter";
 
 interface Props {
-    closeRegister: React.Dispatch<React.SetStateAction<boolean>>;
+    closeRegister: () => void;
 }
 
 interface FormElements extends HTMLFormControlsCollection {
@@ -29,7 +30,7 @@ const Register: React.FC<Props> = ({ closeRegister }) => {
     const [myAvatar, setAvatar] = React.useState<File>()
 
     const handleCancel = () => {
-        closeRegister(false);
+        closeRegister();
     }
     const handleRegister = (e: React.FormEvent<YourFormElement>) => {
         e.preventDefault();
@@ -70,7 +71,7 @@ const Register: React.FC<Props> = ({ closeRegister }) => {
         SignUp({ email: email, password: password, confirmPassword: confirm});
 
         dispatch({ type: "ADD_LOGIN", payload: { email: email, password: password } })
-        closeRegister(false);
+        closeRegister();
     }
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
@@ -117,10 +118,11 @@ const Register: React.FC<Props> = ({ closeRegister }) => {
 <div>Avatar: <input type="file" accept="image/*" multiple={false} id="avatar" name="avatar" onChange={handleChange } />
         </div>
                 <button type='submit'>Register</button><br />
-                <button onClick={handleCancel}>Cancel</button>
+                
 
 
             </form>
+            <button onClick={handleCancel}>Cancel</button>
         </>
     );
 }

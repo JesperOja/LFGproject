@@ -14,4 +14,20 @@ router.post('/', async (req, res) => {
     res.json(newPost);
 })
 
+router.post('/:id/dislike', async (req,res) => {
+    const postId = Number(req.params.id);
+    const thisPost = await Post.findByPk(postId) as Post;
+    thisPost.dislikes++;
+    await thisPost.save();
+    res.json(thisPost);
+})
+
+router.post('/:id/like', async (req,res) => {
+    const postId = Number(req.params.id);
+    const thisPost = await Post.findByPk(postId) as Post;
+    thisPost.likes++;
+    await thisPost.save();
+    res.json(thisPost);
+})
+
 export default router;

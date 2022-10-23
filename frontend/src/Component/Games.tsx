@@ -5,10 +5,10 @@ import { ProfileModel } from "../types";
 interface Props {
     currentUser: ProfileModel;
 }
-/* eslint-disable react/prop-types */
+
 const Games: React.FC<Props> = ({ currentUser }) => {
     const [{ games }] = useStateValue();
-    /* eslint-disable react/prop-types */
+   
     const myGames = Object.values(games).filter(game => Number(game.profileId) === Number(currentUser.id));
 
     if (myGames) {

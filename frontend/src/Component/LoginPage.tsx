@@ -13,7 +13,7 @@ export default function LoginPage() {
         <div >
             
             <div >
-                <FormRender isLogin={registerForm} showRegister={showRegister} />
+                <FormRender isLogin={registerForm} showRegister={showRegisterForm} />
                 <button id='registerButton' onClick={() => showRegisterForm()} > <ButtonText isLogin={registerForm} /> </button>
             </div>
         </div>
@@ -22,7 +22,7 @@ export default function LoginPage() {
 
 type MainProps = {
     isLogin: boolean;
-    showRegister: React.Dispatch<React.SetStateAction<boolean>>;
+    showRegister: () => void;
 }
 
 class FormRender extends React.Component<MainProps> {

@@ -1,4 +1,4 @@
-import { Game, Login, Post, ProfileModel } from "../types"
+import { Comment, Game, Login, Post, ProfileModel } from "../types"
 import { State } from "./state";
 
 
@@ -43,6 +43,14 @@ export type Action =
     | {
         type:"ADD_POST";
         payload: Post;
+    }
+    | {
+        type: "GET_COMMENTS";
+        payload: Comment[];
+    }
+    |{
+        type: "UPDATE_POSTS";
+        payload: Post;
     };
 
 export const reducer = (state: State, action: Action): State => {
@@ -52,7 +60,7 @@ export const reducer = (state: State, action: Action): State => {
                 ...state,
                 games: {
                     ...action.payload.reduce(
-                        (memo, game) => ({ ...memo, [game.name]: game }), {}),
+                        (memo, game) => ({ ...memo, [Number(game.id)]: game }), {}),
                     ...state.games
                 }
             };
@@ -61,7 +69,7 @@ export const reducer = (state: State, action: Action): State => {
                 ...state,
                 games: {
                     ...state.games,
-                    [action.payload.name]: action.payload
+                    [Number(action.payload.id)]: action.payload
                 }
             };
         case "LOGIN":
@@ -126,7 +134,7 @@ export const reducer = (state: State, action: Action): State => {
                 ...state,
                 posts:{
                     ...action.payload.reduce(
-                        (memo, post) => ({ ...memo, [post.title]: post }),
+                        (memo, post) => ({ ...memo, [Number(post.id)]: post }),
                         {}
                     ),
                     ...state.posts
@@ -136,10 +144,27 @@ export const reducer = (state: State, action: Action): State => {
             return {
                 ...state,
                 posts: {
-                    ...state.posts,
-                    [action.payload.title]: action.payload
+                   
+                    [Number(action.payload.id)]: action.payload,
+                    ...state.posts
                 }
             }
+            case "GET_COMMENTS":
+                return{
+                    ...state,
+                    comments:{
+                        ...action.payload.reduce(
+                            (memo, comment) => ({ ...memo, [Number(comment.id)]: comment }),
+                            {}
+                        ),
+                        ...state.comments
+                    }
+                };
+            case "UPDATE_POSTS":
+                return {...state,
+                posts: {
+                    ...state.posts
+                }};
         default:
             return state;
     }

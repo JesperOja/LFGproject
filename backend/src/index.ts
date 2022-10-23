@@ -4,6 +4,7 @@ import profileRouter from './routes/profile';
 import userRouter from './routes/user';
 import postRouter from './routes/post';
 import gameRouter from './routes/game';
+import commentRouter from './routes/comment';
 
 const { connectToDatabase } = require('./util/db')
 
@@ -17,6 +18,7 @@ app.use('/api/profile', profileRouter);
 app.use('/api/user', userRouter);
 app.use('/api/post', postRouter);
 app.use('/api/game', gameRouter);
+app.use('/api/comment', commentRouter);
 
 const start = async () => {
   await connectToDatabase()

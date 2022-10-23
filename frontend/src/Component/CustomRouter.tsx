@@ -1,4 +1,4 @@
-import React, { FC, PropsWithChildren } from "react";
+import React, { PropsWithChildren } from "react";
 import { unstable_HistoryRouter as HistoryRouter } from "react-router-dom";
 import { createBrowserHistory } from "history";
 
