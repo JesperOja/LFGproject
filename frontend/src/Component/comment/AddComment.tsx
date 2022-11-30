@@ -1,8 +1,8 @@
 import React from "react";
-import { addComment, getComments } from "../services/commentService";
-import { useStateValue } from "../state/state";
+import { addComment, getComments } from "../../services/commentService";
+import { useStateValue } from "../../state/state";
 
-import { Comment, Post, ProfileModel } from "../types";
+import { Comment, Post, ProfileModel } from "../../types";
 
 
 interface FormElements extends HTMLFormControlsCollection {

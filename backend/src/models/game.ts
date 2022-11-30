@@ -9,6 +9,7 @@ export class Game extends Model<InferAttributes<Game>, InferCreationAttributes<G
     declare rank: string | null;
     declare server: string | null;
     declare comments: string | null;
+    declare profileId: number;
 }
 
 Game.init({
@@ -35,7 +36,12 @@ Game.init({
     },
     comments:{
         type: DataTypes.STRING
-    } 
+    },
+    profileId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {model: 'profiles', key: 'id'}
+    }
 }, {
     sequelize,
     underscored: true,

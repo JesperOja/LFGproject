@@ -42,4 +42,29 @@ router.get('/', async (_req,res) => {
     res.send(users);
 })
 
+router.put('/:email', async (req, res) => {
+    const user = req.body as User;
+    let editedUser = await User.findByPk(user.email);
+    if(editedUser){
+        editedUser = user;
+        await editedUser.save()
+        res.json(editedUser)
+    }else{
+        res.status(404).end()
+    }
+})
+
+router.delete('/:email', async (req, res) => {
+    const email = req.params.email;
+    const user = await User.findByPk(email);
+
+    if(user){
+        await user.destroy()
+        res.json("Removed succefully!");
+    }
+    else{
+        res.status(204).end();
+    }
+})
+
 export default router;

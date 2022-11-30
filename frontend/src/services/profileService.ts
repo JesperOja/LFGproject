@@ -36,7 +36,7 @@ export const getProfiles = async () => {
 
 export const updateProfile = async (profile: ProfileModel) => {
     try{
-        const {data: data} = await axios.put<string>(baseUrl, profile);
+        const {data: data} = await axios.put<ProfileModel>(`${baseUrl}/${profile.id}`, profile);
         
         return data;
     }catch(e: unknown){
@@ -50,9 +50,7 @@ export const updateProfile = async (profile: ProfileModel) => {
 
 export const deleteProfile = async (id:number) => {
     try{
-        const {data: data} = await axios.delete<string>(`${baseUrl}(${id})`);
-        
-        return data;
+        await axios.delete(`${baseUrl}/${id}`);
     }catch(e: unknown){
         let errorMessage = 'Something went wrong.'
 		if (axios.isAxiosError(e) && e.response) {

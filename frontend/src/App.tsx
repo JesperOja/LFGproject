@@ -1,39 +1,60 @@
 import React, { useEffect } from 'react';
-import Profile from './Component/Profile';
-import LoginPage from './Component/LoginPage';
+import Profile from './Component/profile/Profile';
+import LoginPage from './Component/login/LoginPage';
 import './App.css';
 import { useStateValue } from './state/state';
-import { Login, ProfileModel } from './types';
+import { Game, Login, Post, ProfileModel, Comment } from './types';
 import { getUsers } from './services/userService';
 import { getProfiles } from './services/profileService';
 import {
   Route, Link, Routes
 } from "react-router-dom"
-import HomePage from './Component/HomePage';
-import CustomRouter from './Component/CustomRouter';
-import ProfilePage from './Component/ProfilePage';
-import GameInfo from './Component/GameInfo';
+import HomePage from './Component/home/HomePage';
+import CustomRouter from './Component/router/CustomRouter';
+import ProfilePage from './Component/profile/ProfilePage';
+import GameInfo from './Component/game/GameInfo';
+import { getAll } from './services/gameService';
+import { getPosts } from './services/postService';
+import { getComments } from './services/commentService';
+import AboutPage from './Component/home/AboutPage';
+import EditProfileForm from './Component/profile/EditProfileForm';
 
 const App: React.FC = () => {
-  const [{ email }, dispatch] = useStateValue();
+  const [{ email, profile }, dispatch] = useStateValue();
 
   useEffect(() => {
-    getUsers().then(user => {
-      const users: Login[] = user as Login[];
-      console.log(user);
-      dispatch({ type: "GET_USERS", payload: users });
-    });
-
     getProfiles().then(data => {
 
       const profiles: ProfileModel[] = data as ProfileModel[];
       dispatch({ type: "GET_PROFILES", payload: profiles });
     });
+    getUsers().then(user => {
+      const users: Login[] = user as Login[];
+
+      dispatch({ type: "GET_USERS", payload: users });
+    });
+    /*
+      getAll().then(game => {
+          const games: Game[] = game as Game[];
+      
+          dispatch({ type: "GET_GAME_LIST", payload: games });
+      });
+    */
+    getPosts().then(post => {
+      const posts: Post[] = post as Post[];
+      posts.sort((a, b) => Number(b.id) - Number(a.id));
+      dispatch({ type: "GET_POSTS", payload: posts });
+    });
+
+    getComments().then(comment => {
+      const comments = comment as Comment[];
+
+      dispatch({ type: "GET_COMMENTS", payload: comments });
+    })
 
     const loggedUserJSON = window.localStorage.getItem('loggedUser');
     if (loggedUserJSON && loggedUserJSON !== undefined) {
       const user = JSON.parse(loggedUserJSON);
-
       dispatch({ type: "LOGIN", payload: user });
     }
 
@@ -44,7 +65,8 @@ const App: React.FC = () => {
       <LoginPage />
     )
   } else {
-
+    const thisuser = Object.values(profile).filter(prof => prof.email === email);
+    
     window.localStorage.setItem(
       'loggedUser', JSON.stringify(email)
     )
@@ -62,7 +84,7 @@ const App: React.FC = () => {
             <div className="absolute w-full h-full">
               <div className="flex h-full mx-auto w-fit justify-around">
                 <Link to="/"><button className="px-5 hover:bg-gray-300 h-full hover:text-gray-900">Feed</button></Link>
-                <button onClick={handleLogout} className="px-5 hover:bg-gray-300 hover:text-gray-900">About</button>
+                <Link to="/About "><button  className="px-5 hover:bg-gray-300 hover:text-gray-900">About</button></Link>
               </div>
             </div>
 
@@ -79,6 +101,8 @@ const App: React.FC = () => {
           <Route path='/login' element={<LoginPage />} />
           <Route path='/profile/:id' element={<ProfilePage />} />
           <Route path='/game/:id' element={<GameInfo />} />
+          <Route path='/About' element={<AboutPage />} />
+          <Route path='/profile/edit' element={<EditProfileForm currentUser={thisuser[0]} />} />
         </Routes>
       </CustomRouter>
     );

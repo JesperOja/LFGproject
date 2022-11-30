@@ -1,9 +1,9 @@
 import React from "react";
-import { getComments } from "../services/commentService";
-import { getPosts } from "../services/postService";
-import { getProfiles } from "../services/profileService";
-import { useStateValue } from "../state/state";
-import { Comment, Post, ProfileModel } from "../types";
+import { getComments } from "../../services/commentService";
+import { getPosts } from "../../services/postService";
+import { getProfiles } from "../../services/profileService";
+import { useStateValue } from "../../state/state";
+import { Comment, Post, ProfileModel } from "../../types";
 import AddComment from "./AddComment";
 
 interface Props {

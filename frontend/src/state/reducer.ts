@@ -51,6 +51,14 @@ export type Action =
     |{
         type: "UPDATE_POSTS";
         payload: Post;
+    }
+    | {
+        type: "UPDATE_GAMES";
+        payload: Game;
+    }
+    | {
+        type: "UPDATE_PROFILE";
+        payload: ProfileModel;
     };
 
 export const reducer = (state: State, action: Action): State => {
@@ -165,6 +173,20 @@ export const reducer = (state: State, action: Action): State => {
                 posts: {
                     ...state.posts
                 }};
+            case "UPDATE_GAMES":
+                return {...state,
+                games: {
+                    ...state.games
+                }}
+                case "UPDATE_PROFILE":
+
+            return {
+                ...state,
+                profile: {
+                    ...state.profile,
+                    [action.payload.email]: action.payload
+                }
+            };
         default:
             return state;
     }

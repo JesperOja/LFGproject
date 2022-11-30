@@ -14,6 +14,16 @@ router.post('/', async (req, res) => {
     res.json(newPost);
 })
 
+router.get('/:profileId', async (req,res) => {
+    const profileId = Number(req.params.profileId);
+    const profilePosts = await Post.findAll({
+        where: {
+            profileId: profileId
+        }
+    });
+    res.json(profilePosts);
+})
+
 router.post('/:id/dislike', async (req,res) => {
     const postId = Number(req.params.id);
     const thisPost = await Post.findByPk(postId) as Post;
