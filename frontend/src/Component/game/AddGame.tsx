@@ -1,5 +1,5 @@
 import React from "react";
-import { addGame } from "../../services/gameService";
+import { addGame, getAll } from "../../services/gameService";
 import { useStateValue } from "../../state/state";
 import { Game, ProfileModel } from '../../types';
 
@@ -45,8 +45,15 @@ const AddGame: React.FC<Props> = ({ closeForm, currentUser }) => {
         }
 
 
-        addGame(newGame);
-        dispatch({ type: "UPDATE_GAMES" , payload: newGame });
+        addGame(newGame).then(game => {
+            const gameNew = game as Game;
+            dispatch({ type: "UPDATE_GAMES" , payload: gameNew });
+            getAll().then(games => {
+                const allGames = games as Game[];
+                dispatch({type: "GET_GAME_LIST", payload: allGames});
+            })
+        });
+        
         closeForm();
     }
     const handleCancel = () => {

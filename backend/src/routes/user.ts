@@ -56,9 +56,13 @@ router.put('/:email', async (req, res) => {
 
 router.delete('/:email', async (req, res) => {
     const email = req.params.email;
-    const user = await User.findByPk(email);
+    const user = await User.findOne({
+        where:{
+            email: email
+        }
+    });
 
-    if(user){
+    if(user !== null){
         await user.destroy()
         res.json("Removed succefully!");
     }

@@ -33,28 +33,34 @@ const App: React.FC = () => {
 
       dispatch({ type: "GET_USERS", payload: users });
     });
-    /*
-      getAll().then(game => {
-          const games: Game[] = game as Game[];
-      
-          dispatch({ type: "GET_GAME_LIST", payload: games });
-      });
-    */
+
+    getAll().then(game => {
+      const games: Game[] = game as Game[];
+      if(games.length > 0){
+        dispatch({ type: "GET_GAME_LIST", payload: games });
+      }
+    });
+
     getPosts().then(post => {
       const posts: Post[] = post as Post[];
-      posts.sort((a, b) => Number(b.id) - Number(a.id));
-      dispatch({ type: "GET_POSTS", payload: posts });
+      if (posts.length > 0) {
+        posts.sort((a, b) => Number(b.id) - Number(a.id));
+        dispatch({ type: "GET_POSTS", payload: posts });
+      }
+
     });
 
     getComments().then(comment => {
       const comments = comment as Comment[];
+      if (comments.length > 0) {
+        dispatch({ type: "GET_COMMENTS", payload: comments });
+      }
 
-      dispatch({ type: "GET_COMMENTS", payload: comments });
     })
 
     const loggedUserJSON = window.localStorage.getItem('loggedUser');
     if (loggedUserJSON && loggedUserJSON !== undefined) {
-      const user = JSON.parse(loggedUserJSON);
+      const user: string = JSON.parse(loggedUserJSON);
       dispatch({ type: "LOGIN", payload: user });
     }
 
@@ -65,8 +71,8 @@ const App: React.FC = () => {
       <LoginPage />
     )
   } else {
-    const thisuser = Object.values(profile).filter(prof => prof.email === email);
-    
+    const thisuser = Object.values(profile).find(prof => prof.email === email) as ProfileModel;
+
     window.localStorage.setItem(
       'loggedUser', JSON.stringify(email)
     )
@@ -84,7 +90,7 @@ const App: React.FC = () => {
             <div className="absolute w-full h-full">
               <div className="flex h-full mx-auto w-fit justify-around">
                 <Link to="/"><button className="px-5 hover:bg-gray-300 h-full hover:text-gray-900">Feed</button></Link>
-                <Link to="/About "><button  className="px-5 hover:bg-gray-300 hover:text-gray-900">About</button></Link>
+                <Link to="/About "><button className="px-5 hover:bg-gray-300 hover:text-gray-900">About</button></Link>
               </div>
             </div>
 
@@ -102,7 +108,7 @@ const App: React.FC = () => {
           <Route path='/profile/:id' element={<ProfilePage />} />
           <Route path='/game/:id' element={<GameInfo />} />
           <Route path='/About' element={<AboutPage />} />
-          <Route path='/profile/edit' element={<EditProfileForm currentUser={thisuser[0]} />} />
+          <Route path='/profile/edit' element={<EditProfileForm currentUser={thisuser} />} />
         </Routes>
       </CustomRouter>
     );

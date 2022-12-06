@@ -54,7 +54,7 @@ router.delete('/:id', async (req, res) => {
     const id = req.params.id;
     const profile = await Profile.findByPk(id)
 
-    if(profile){
+    if(profile !== null){
         await profile.destroy()
         res.json({message: 'Profile removed successfully'})
     }else{

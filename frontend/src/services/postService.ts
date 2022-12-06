@@ -35,8 +35,7 @@ export const addPost = async (post: Post) => {
 
 export const deletePost = async (id: number) => {
     try{
-        const {data: data} = await axios.delete<string>(`${baseUrl}/${id}`);
-        return data;
+        await axios.delete(`${baseUrl}/${id}`);
     }catch (e: unknown) {
         let errorMessage = 'Something went wrong.'
         if (axios.isAxiosError(e) && e.response) {
@@ -49,7 +48,7 @@ export const deletePost = async (id: number) => {
 
 export const editPost = async (post: Post) => {
     try{
-        const {data: data} = await axios.put<string>(baseUrl, post);
+        const {data: data} = await axios.put<Post>(`${baseUrl}/${post.id}`, post);
         return data;
     }catch (e: unknown) {
         let errorMessage = 'Something went wrong.'

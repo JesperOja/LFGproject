@@ -65,20 +65,20 @@ const Profile: React.FC = () => {
     }, [dispatch]);
 
 
-    const user = Object.values(profile).filter(prof => prof.email === email);
+    const user = Object.values(profile).find(prof => prof.email === email);
 
-    if (user.length !== 0) {
+    if (user) {
         if (addGame) {
             return (
-                <AddGame closeForm={addNewGame} currentUser={user[0]} />
+                <AddGame closeForm={addNewGame} currentUser={user} />
             )
         }
         return (
             <div>
                 <Link to="/profile/edit"><button className="uppercase font-semibold">Edit</button></Link>
-                <div key={user[0].id} >
+                <div key={user.id} >
 
-                    <ProfileInfo currentUser={user[0]} />
+                    <ProfileInfo currentUser={user} />
 
                     <div id='game-section' >
                         <div >
@@ -86,7 +86,7 @@ const Profile: React.FC = () => {
                             <hr ></hr>
                         </div>
                         <div className='flex w-fit'>
-                            <Games currentUser={user[0]} />
+                            <Games currentUser={user} />
                             <div >
                                 <button onClick={addNewGame} >Add Game</button>
                             </div>
@@ -101,9 +101,9 @@ const Profile: React.FC = () => {
                         </div>
 
                         <div >
-                            {newPost && <AddPost currentUser={user[0]} toggleNewPost={togglePost} />}
+                            {newPost && <AddPost currentUser={user} toggleNewPost={togglePost} />}
                         </div>
-                        <Posts currentUser={user[0]} />
+                        <Posts currentUser={user} />
                     </div>
                 </div>
             </div>

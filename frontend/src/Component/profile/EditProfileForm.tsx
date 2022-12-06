@@ -2,13 +2,14 @@ import React from "react";
 import { updateProfile } from "../../services/profileService";
 import { editUser } from "../../services/userService";
 import { useStateValue } from "../../state/state";
-import { ProfileModel, Login } from "../../types";
+import { ProfileModel, Login, Comment } from "../../types";
 import { deletePost } from "../../services/postService";
 import { deleteGame } from "../../services/gameService";
 import { rootNavigate } from "../router/CustomRouter";
 import { deleteUser } from "../../services/userService";
 import { deleteProfile } from "../../services/profileService";
 import { Game, Post } from "../../types";
+import { deleteComment } from "../../services/commentService";
 
 interface FormElements extends HTMLFormControlsCollection {
     password: HTMLInputElement;
@@ -32,25 +33,29 @@ interface Props {
 
 const EditProfileForm: React.FC<Props> = ({ currentUser }) => {
     const [editPassword, toggleEdit] = React.useState<boolean>(false);
-    const [{ profile, email, login, posts, games }, dispatch] = useStateValue();
+    const [{ login, posts, games, comments }, dispatch] = useStateValue();
 
     const thisUser = Object.values(login).find(u => u.email === currentUser.email) as Login
 
     const removeProfile = () => {
         if (window.confirm(`Are you sure you want to remove your profile, note that this action will remove your logging info as well?`)) {
             const myPosts = Object.values(posts).filter(post => Number(post.profileId) === Number(currentUser.id)) as Post[];
+            const myComments = Object.values(comments).filter(comment => Number(comment.posterId) === Number(currentUser.id)) as Comment[]
             const myGames = Object.values(games).filter(game => Number(game.profileId) === Number(currentUser.id)) as Game[];
-            const logged = Object.values(profile).find(prof => prof.email === email) as ProfileModel;
-            myPosts.map(post => {
+
+            myComments.forEach(comment => {
+                deleteComment(Number(comment.id));
+            })
+            myPosts.forEach(post => {
                 deletePost(Number(post.id));
             })
 
-            myGames.map(game => {
+            myGames.forEach(game => {
                 deleteGame(Number(game.id))
             })
 
 
-            deleteProfile(Number(logged.id));
+            deleteProfile(Number(currentUser.id));
             deleteUser(thisUser.email);
 
             window.localStorage.clear();

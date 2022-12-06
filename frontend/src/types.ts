@@ -32,7 +32,7 @@ export interface Login {
 export interface Post {
     id?: number;
     title: string;
-    createdAt?: string;
+    date: string;
     content: string;
     profileId: number;
     likes?: number;

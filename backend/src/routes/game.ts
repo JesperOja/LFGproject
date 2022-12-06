@@ -24,4 +24,41 @@ router.post('/', async (req, res) => {
     res.json(newGame);
 })
 
+router.delete('/:id', async (req, res) => {
+    try{
+    const id = req.params.id;
+    const game = await Game.findByPk(id)
+
+    if(game !== null){
+        await game.destroy()
+        res.json({message: 'Profile removed successfully'})
+    }else{
+        res.status(400).end();
+    }
+}catch(error) {
+    res.status(400).json({ error })
+  }
+})
+
+router.put('/:id', async (req, res) => {
+    try{
+        const id = Number(req.params.id);
+        const editedGame = req.body as Game;
+        const game = await Game.findByPk(id);
+        if(game){
+            game.name = editedGame.name;
+            game.comments = editedGame.comments;
+            game.server = editedGame.server;
+            game.rank = editedGame.rank;
+            game.hours = editedGame.hours;
+            game.nicknameIngame = editedGame.nicknameIngame;
+            console.log(game)
+            await game.save();
+            res.json(game);
+        }
+    }catch(error) {
+    res.status(400).json({ error })
+  }
+})
+
 export default router;

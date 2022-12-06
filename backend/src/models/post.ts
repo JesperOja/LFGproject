@@ -1,5 +1,5 @@
 import {sequelize} from '../util/db';
-import { Model, DataTypes, InferCreationAttributes, CreationOptional, InferAttributes } from "sequelize";
+import { Model, DataTypes, InferCreationAttributes, CreationOptional, InferAttributes, DateOnlyDataType } from "sequelize";
 
 export class Post extends Model<InferAttributes<Post>, InferCreationAttributes<Post>>{
     declare id: CreationOptional<number>;
@@ -8,6 +8,7 @@ export class Post extends Model<InferAttributes<Post>, InferCreationAttributes<P
     declare content: string;
     declare likes: number;
     declare dislikes: number;
+    declare date: DateOnlyDataType;
 }
 
 Post.init({
@@ -37,6 +38,10 @@ Post.init({
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {model: 'profiles', key: 'id'}
+    },
+    date: {
+        type: DataTypes.DATEONLY,
+        allowNull: false
     }
 },{
     sequelize,

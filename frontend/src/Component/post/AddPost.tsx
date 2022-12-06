@@ -27,20 +27,28 @@ const AddPost: React.FC<Props> = ({ currentUser, toggleNewPost }) => {
 
         const title = e.currentTarget.elements.title.value;
         const content = e.currentTarget.elements.content.value;
+        const date = new Date().toUTCString();
 
         if(title && content){
 
             const newPost: Post = {
                 title: title,
                 content: content,
-                profileId: Number(currentUser.id)
+                profileId: Number(currentUser.id),
+                date: date
             }
     
-            addPost(newPost);
+            addPost(newPost).then(post => {
+                const resPost = post as Post
+                console.log(resPost)
+                getPosts().then(posts => {
+                    const allPosts = posts as Post[]
+                    dispatch({type: "GET_POSTS", payload: allPosts})
+                })
+            });
             
             e.currentTarget.elements.title.value = "";
             e.currentTarget.elements.content.value = "";
-            dispatch({type: "UPDATE_POSTS", payload: newPost});
             
             toggleNewPost();
             rootNavigate('/profile');

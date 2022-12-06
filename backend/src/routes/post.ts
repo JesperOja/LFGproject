@@ -40,4 +40,36 @@ router.post('/:id/like', async (req,res) => {
     res.json(thisPost);
 })
 
+router.delete('/:id', async (req, res) => {
+    try{
+    const id = req.params.id;
+    const post = await Post.findByPk(id)
+
+    if(post !== null){
+        await post.destroy()
+        res.json({message: 'Profile removed successfully'})
+    }else{
+        res.status(400).end();
+    }
+}catch(error) {
+    res.status(400).json({ error })
+  }
+})
+
+router.put('/:id', async (req, res) => {
+    try{
+        const id = Number(req.params.id);
+        const editedPost = req.body as Post;
+        const post = await Post.findByPk(id);
+        if(post){
+            post.title = editedPost.title;
+            post.content = editedPost.content;
+            await post.save();
+            res.json(post);
+        }
+    }catch(error) {
+    res.status(400).json({ error })
+  }
+})
+
 export default router;

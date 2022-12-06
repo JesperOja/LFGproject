@@ -66,7 +66,7 @@ const Comments: React.FC<Props> = ({ post }) => {
                         <div key={comment.id} >
                             <div>
                                 <div className='flex'>
-                                    <h4 >{Object.values(profile).find(prof => Number(prof.id) === Number(comment.postId))?.username}</h4>
+                                    <h4 >{Object.values(profile).find(prof => Number(prof.id) === Number(comment.posterId))?.username}</h4>
                                     <p>{comment.createdAt?.replace("T", " | ").slice(0, -5)}</p>
                                 </div>
                                 <div>

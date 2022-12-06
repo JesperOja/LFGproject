@@ -31,8 +31,7 @@ export const addComment = async (comment: Comment) => {
 
 export const deleteComment = async (id: number) => {
 	try {
-		const { data: data } = await axios.delete<string>(`${baseUrl}/${id}`)
-		return data;
+		await axios.delete(`${baseUrl}/${id}`)
 	} catch (error: unknown) {
 		let errorMessage = 'Something went wrong.'
 		if (axios.isAxiosError(error) && error.response) {
@@ -44,7 +43,7 @@ export const deleteComment = async (id: number) => {
 
 export const editComment = async (comment: Comment) => {
 	try {
-		const { data: data } = await axios.put<string>(baseUrl, comment)
+		const { data: data } = await axios.put<Comment>(baseUrl, comment)
 		return data;
 	} catch (error: unknown) {
 		let errorMessage = 'Something went wrong.'

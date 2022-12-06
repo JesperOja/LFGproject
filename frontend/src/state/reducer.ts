@@ -37,18 +37,18 @@ export type Action =
         payload: ProfileModel[];
     }
     | {
-        type:"GET_POSTS";
+        type: "GET_POSTS";
         payload: Post[];
     }
     | {
-        type:"ADD_POST";
+        type: "ADD_POST";
         payload: Post;
     }
     | {
         type: "GET_COMMENTS";
         payload: Comment[];
     }
-    |{
+    | {
         type: "UPDATE_POSTS";
         payload: Post;
     }
@@ -59,6 +59,14 @@ export type Action =
     | {
         type: "UPDATE_PROFILE";
         payload: ProfileModel;
+    }
+    | {
+        type: "UPDATE_POST";
+        payload: Post;
+    }
+    |{
+        type: "UPDATE_GAME";
+        payload: Game;
     };
 
 export const reducer = (state: State, action: Action): State => {
@@ -108,39 +116,39 @@ export const reducer = (state: State, action: Action): State => {
                 }
             };
         case "GET_PROFILES":
-            if(action.payload === undefined){
-                return {...state};
-            }else{
-            return {
-                ...state,
-                profile: {
-                    ...action.payload.reduce(
-                        (memo, profile) => ({ ...memo, [profile.email]: profile }),
-                        {}
-                    ),
-                    ...state.profile
-                }
-            };
-        }
+            if (action.payload === undefined) {
+                return { ...state };
+            } else {
+                return {
+                    ...state,
+                    profile: {
+                        ...action.payload.reduce(
+                            (memo, profile) => ({ ...memo, [profile.email]: profile }),
+                            {}
+                        ),
+                        ...state.profile
+                    }
+                };
+            }
         case "GET_USERS":
-            if(action.payload === undefined){
-                return {...state};
-            }else{
+            if (action.payload === undefined) {
+                return { ...state };
+            } else {
+                return {
+                    ...state,
+                    login: {
+                        ...action.payload.reduce(
+                            (memo, login) => ({ ...memo, [login.email]: login }),
+                            {}
+                        ),
+                        ...state.login
+                    }
+                };
+            }
+        case "GET_POSTS":
             return {
                 ...state,
-                login: {
-                    ...action.payload.reduce(
-                        (memo, login) => ({ ...memo, [login.email]: login }),
-                        {}
-                    ),
-                    ...state.login
-                }
-            };
-        }
-        case "GET_POSTS":
-            return{
-                ...state,
-                posts:{
+                posts: {
                     ...action.payload.reduce(
                         (memo, post) => ({ ...memo, [Number(post.id)]: post }),
                         {}
@@ -152,39 +160,61 @@ export const reducer = (state: State, action: Action): State => {
             return {
                 ...state,
                 posts: {
-                   
+
                     [Number(action.payload.id)]: action.payload,
                     ...state.posts
                 }
             }
-            case "GET_COMMENTS":
-                return{
-                    ...state,
-                    comments:{
-                        ...action.payload.reduce(
-                            (memo, comment) => ({ ...memo, [Number(comment.id)]: comment }),
-                            {}
-                        ),
-                        ...state.comments
-                    }
-                };
-            case "UPDATE_POSTS":
-                return {...state,
+        case "GET_COMMENTS":
+            return {
+                ...state,
+                comments: {
+                    ...action.payload.reduce(
+                        (memo, comment) => ({ ...memo, [Number(comment.id)]: comment }),
+                        {}
+                    ),
+                    ...state.comments
+                }
+            };
+        case "UPDATE_POSTS":
+            return {
+                ...state,
                 posts: {
                     ...state.posts
-                }};
-            case "UPDATE_GAMES":
-                return {...state,
+                }
+            };
+        case "UPDATE_GAMES":
+            return {
+                ...state,
                 games: {
                     ...state.games
-                }}
-                case "UPDATE_PROFILE":
+                }
+            }
+        case "UPDATE_PROFILE":
 
             return {
                 ...state,
                 profile: {
                     ...state.profile,
                     [action.payload.email]: action.payload
+                }
+            };
+
+        case "UPDATE_POST":
+            return {
+                ...state,
+                posts: {
+                    ...state.posts,
+                    [Number(action.payload.id)]: action.payload,
+                }
+            };
+
+        case "UPDATE_GAME":
+            return {
+                ...state,
+                games: {
+                    ...state.games,
+                    [Number(action.payload.id)]: action.payload
                 }
             };
         default:

@@ -1,5 +1,4 @@
 import axios from "axios";
-import { json } from "react-router-dom";
 import { Game } from "../types"
 
 //const baseUrl = "https://immense-cove-02108.herokuapp.com/api/Game";
@@ -51,7 +50,7 @@ export const getMyGames = async (id: number) => {
 
 export const editGame = async (game: Game) => {
 	try {
-		const { data: data } = await axios.put<Game>(baseUrl, game)
+		const { data: data } = await axios.put<Game>(`${baseUrl}/${game.id}`, game)
 		return data;
 	} catch (error: unknown) {
 		let errorMessage = 'Something went wrong.'
@@ -64,8 +63,7 @@ export const editGame = async (game: Game) => {
 
 export const deleteGame = async (id: number) => {
 	try {
-		const { data: data } = await axios.delete<string>(`${baseUrl}/${id}`)
-		return data;
+		await axios.delete(`${baseUrl}/${id}`)
 	} catch (error: unknown) {
 		let errorMessage = 'Something went wrong.'
 		if (axios.isAxiosError(error) && error.response) {
