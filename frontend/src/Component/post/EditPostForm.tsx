@@ -63,20 +63,21 @@ const EditPostForm: React.FC<Props> = ({currentPost, toggleForm}) => {
         textFieldDispatch("");
         inputFieldDispatch("");
         editButton(false);
+        toggleForm();
     }
 
     return (
         <>
             <form onSubmit={handleSubmit} >
                 <div className='flex flex-col mb-5'>
-                    <input name="title" id="title"  onChange={(e) => inputFieldDispatch(e.target.value)} onFocus={activateTextAreaChange} defaultValue={currentPost.title} placeholder="Title" maxLength={maxTitleLenght} />
-                    <textarea name="content" id="content"  defaultValue={currentPost.content} onChange={(e) => textFieldDispatch(e.target.value)} onFocus={activateTextAreaChange} placeholder="Content" rows={4} cols={40} maxLength={maxPostLenght} />
+                    <input name="title" id="title"  onChange={(e) => inputFieldDispatch(e.target.value)} onFocus={activateTextAreaChange} defaultValue={currentPost.title} placeholder="Title" maxLength={maxTitleLenght} className='break-words bg-lightBackground px-2 py-1 text-xl font-bold mb-2 rounded-md'/>
+                    <textarea name="content" id="content"  defaultValue={currentPost.content} onChange={(e) => textFieldDispatch(e.target.value)} onFocus={activateTextAreaChange} placeholder="Content" rows={4} cols={40} maxLength={maxPostLenght} className='p-2 bg-lightBackground rounded-md'/>
                     <p >{textField.length}/{maxPostLenght}</p>
                 </div>
                 {showEditButton &&
                     <div >
-                        <button onClick={deactivateTextAreaChange} >CancUl</button>
-                        <button type="submit" >Edit</button>
+                        <button onClick={deactivateTextAreaChange} className='uppercase text-sm w-24 px-4 py-2 hover:text-white rounded-full hover:bg-gray-500'>Cancel</button>
+                        <button type="submit" className='rounded-full bg-primary text-sm px-4 py-2 w-24 text-white hover:ring-4 px-4 py-2 uppercase font-semibold'>Edit</button>
                     </div>
                 }
             </form>

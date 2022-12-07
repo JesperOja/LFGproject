@@ -13,15 +13,15 @@ const Games: React.FC<Props> = ({ currentUser }) => {
 
     if (myGames) {
         return (
-            <div className='flex'>
+            <div className='flex bg-gray-300 divide-x divide-slate-200'>
                 {myGames.map(game =>
-                    <div key={Number(game.id)} >
+                    <div key={Number(game.id)} className="flex items-start space-x-6 p-6">
                         <Link to={`/game/${Number(game.id)}`}><div >
-                            <h4 >{game.name}</h4> 
+                            <h1 className='font-bold h-fit ml-[7px]'>{game.name}</h1> 
                         </div>
                         <div >
                             
-                            <h1 >{game.hours} Hours</h1>
+                            <h4 className="flex-none w-full mt-2 font-normal ml-[7px]">{game.hours} Hours</h4>
                         </div></Link>
                     </div>
                 )}

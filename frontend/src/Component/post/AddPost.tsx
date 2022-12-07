@@ -61,9 +61,9 @@ const AddPost: React.FC<Props> = ({ currentUser, toggleNewPost }) => {
         <div id='addPost' className=''>
             <form onSubmit={handlePost}>
                 <div className='flex flex-col'>
-                    <input id="title" name="title" placeholder="Title"  />
-                    <textarea name="content" id="content" cols={50} rows={5} placeholder="Post Content..."  />
-                    <button  type="submit">Post!</button>
+                    <input id="title" name="title" placeholder="Title"  className='break-words bg-lightBackground px-2 py-1 text-xl font-bold mb-2 ml-2 mr-2 rounded-md'/>
+                    <textarea name="content" id="content" cols={50} rows={5} placeholder="Post Content..."  className='bg-lightBackground rounded-md h-fit mr-2 px-2 py-1 ml-2 mb-2'/>
+                    <button  type="submit" className='rounded-full bg-primary text-sm px-4 py-2 w-24 text-white hover:ring-4 uppercase font-semibold ml-2'>Post!</button>
                     <br/>
                 </div>
             </form>

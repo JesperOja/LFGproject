@@ -62,17 +62,17 @@ const AddComment: React.FC<Props> = ({thisPost, currentUser, toggleForm}) => {
 
     return (
         <>
-            <form onSubmit={handleSubmit}>
-                <div >
+            <form onSubmit={handleSubmit} className='mt-5 w-[400px] mb-5'>
+                <div className='flex h-fit'>
                     
-                    <textarea id="comment" name="comment" onChange={(e) => textFieldDispatch(e.target.value)} value={textField} onFocus={activateTextAreaChange} placeholder="Comment" rows={1} cols={40} maxLength={maxPostLenght} />
+                    <textarea id="comment" name="comment" onChange={(e) => textFieldDispatch(e.target.value)} value={textField} onFocus={activateTextAreaChange} placeholder="Comment" rows={1} cols={40} maxLength={maxPostLenght} className='bg-lightBackground rounded-md h-fit px-2 py-1 ml-2 '/>
                 </div>
 
-                <div>
+                <div className='w-fit ml-20'>
                     {showCommentButton &&
                         <>
-                            <button onClick={deactivateTextAreaChange} >Cancel</button>
-                            <button type='submit' >Comment</button>
+                            <button onClick={deactivateTextAreaChange} className='uppercase rounded-full text-sm px-3 py-2 hover:text-white hover:bg-gray-500'>Cancel</button>
+                            <button type='submit' className='uppercase rounded-full bg-primary text-sm px-3 py-2 hover:ring-4'>Comment</button>
                         </>
                     }
                 </div>

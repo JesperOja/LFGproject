@@ -81,25 +81,26 @@ const Profile: React.FC = () => {
                     <ProfileInfo currentUser={user} />
 
                     <div id='game-section' >
-                        <div >
+                        <div className="font-bold text-2xl">
                             <h1>Games</h1>
                             <hr ></hr>
                         </div>
-                        <div className='flex w-fit'>
+                        <div className='flex bg-gray-300 divide-x divide-slate-200'>
                             <Games currentUser={user} />
-                            <div >
-                                <button onClick={addNewGame} >Add Game</button>
+                            <div className="flex items-start space-x-3 p-3">
+                                <button onClick={addNewGame} className='rounded-full bg-primary text-sm px-4 py-2 w-24 text-white hover:ring-4 uppercase font-semibold'>Add Game</button>
                             </div>
                         </div>
                     </div>
 
-                    <div >
+                    <div className=' bg-gray-300 divide-x divide-slate-200'>
                         <div >
-                            <h1>Posts</h1>
+                            <h1 className="font-bold text-2xl">Posts</h1>
                             <hr ></hr>
-                            <button onClick={togglePost} >New Post</button>
+                            <div className="flex items-start space-x-3 p-3">
+                                <button onClick={togglePost} className='rounded-full bg-primary text-sm px-4 py-2 w-24 text-white hover:ring-4 uppercase font-semibold'>New Post</button>
+                            </div>
                         </div>
-
                         <div >
                             {newPost && <AddPost currentUser={user} toggleNewPost={togglePost} />}
                         </div>

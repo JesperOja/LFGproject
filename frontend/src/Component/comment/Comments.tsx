@@ -51,26 +51,26 @@ const Comments: React.FC<Props> = ({ post }) => {
             <div>
                 <div className='flex'>
                     {!showComments &&
-                        <button onClick={toggleComments} >Show {postComments.length} Comments</button>
+                        <button onClick={toggleComments} className='font-semibold text-gray-400 mb-1.5'>Show {postComments.length} Comments</button>
                     }
                     {showComments &&
-                        <button onClick={toggleComments}  >Hide Comments</button>
+                        <button onClick={toggleComments}  className='font-semibold text-gray-400'>Hide Comments</button>
                     }
                 </div>
             </div>
            <div> {showComments &&
-                <div className='ml-10 h-fit'>
+                <div className='ml-8 h-fit'>
                     <AddComment currentUser={currentUser} thisPost={post} toggleForm={addComment} />
-                    <div>
+                    <div className="bg-gray-200">
                     {postComments.map(comment =>
-                        <div key={comment.id} >
+                        <div key={comment.id} className='my-5 w-1/2 flex'>
                             <div>
                                 <div className='flex'>
-                                    <h4 >{Object.values(profile).find(prof => Number(prof.id) === Number(comment.posterId))?.username}</h4>
-                                    <p>{comment.createdAt?.replace("T", " | ").slice(0, -5)}</p>
+                                    <h4 className='font-bold h-fit ml-[7px]'>{Object.values(profile).find(prof => Number(prof.id) === Number(comment.posterId))?.username}</h4>
+                                    <p className='italic text-xs font-semobold mt-1 ml-2'>{comment.createdAt?.replace("T", " | ").slice(0, -5)}</p>
                                 </div>
                                 <div>
-                                <p >
+                                <p className='ml-[7px]'>
                                     {comment.comment}
                                 </p>
                                 </div>

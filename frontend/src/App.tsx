@@ -18,6 +18,7 @@ import { getPosts } from './services/postService';
 import { getComments } from './services/commentService';
 import AboutPage from './Component/home/AboutPage';
 import EditProfileForm from './Component/profile/EditProfileForm';
+import { Navbar, Nav } from 'react-bootstrap'
 
 const App: React.FC = () => {
   const [{ email, profile }, dispatch] = useStateValue();
@@ -36,7 +37,7 @@ const App: React.FC = () => {
 
     getAll().then(game => {
       const games: Game[] = game as Game[];
-      if(games.length > 0){
+      if (games.length > 0) {
         dispatch({ type: "GET_GAME_LIST", payload: games });
       }
     });
@@ -83,34 +84,40 @@ const App: React.FC = () => {
     }
 
     return (
-      <CustomRouter>
-        <header>
-          <nav className="h-[65px] border-b shadow-lg flex relative font-semibold text-gray-600">
-
-            <div className="absolute w-full h-full">
-              <div className="flex h-full mx-auto w-fit justify-around">
-                <Link to="/"><button className="px-5 hover:bg-gray-300 h-full hover:text-gray-900">Feed</button></Link>
-                <Link to="/About "><button className="px-5 hover:bg-gray-300 hover:text-gray-900">About</button></Link>
-              </div>
-            </div>
-
-            <div className="ml-auto flex z-10">
-              <Link to="/profile"><button className="h-full px-5 hover:bg-gray-300 hover:text-gray-900">Profile</button></Link>
-              <Link to="/login"><button onClick={handleLogout} className="h-full px-5 hover:bg-red-400 bg-red-600 text-white">Logout</button></Link>
-            </div>
-
-          </nav>
-        </header>
-        <Routes>
-          <Route path='/' element={<HomePage />} />
-          <Route path='/profile' element={<Profile />} />
-          <Route path='/login' element={<LoginPage />} />
-          <Route path='/profile/:id' element={<ProfilePage />} />
-          <Route path='/game/:id' element={<GameInfo />} />
-          <Route path='/About' element={<AboutPage />} />
-          <Route path='/profile/edit' element={<EditProfileForm currentUser={thisuser} />} />
-        </Routes>
-      </CustomRouter>
+      <div className='divide-y divide-slate-100'>
+        <CustomRouter>
+          <header>
+            <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+              <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+              <Navbar.Collapse id="responsive-navbar-nav">
+                <Nav className="mr-auto">
+                  <Nav.Link href="#" as="span">
+                    <Link to="/"><button className="px-5 hover:bg-gray-300 h-full hover:text-gray-900">Feed</button></Link>
+                  </Nav.Link>
+                  <Nav.Link href="#" as="span">
+                    <Link to="/About"><button className="px-5 hover:bg-gray-300 hover:text-gray-900">About</button></Link>
+                  </Nav.Link>
+                  <Nav.Link href="#" as="span">
+                    <Link  to="/profile"><button className="h-full px-5 hover:bg-gray-300 hover:text-gray-900">Profile</button></Link>
+                  </Nav.Link>
+                  <Nav.Link href="#" as="span">
+                  <Link to="/login"><button onClick={handleLogout} className="h-full px-5 hover:bg-red-400 bg-red-600 text-white">Logout</button></Link>
+                  </Nav.Link>
+                </Nav>
+              </Navbar.Collapse>
+            </Navbar>
+          </header>
+          <Routes>
+            <Route path='/' element={<HomePage />} />
+            <Route path='/profile' element={<Profile />} />
+            <Route path='/login' element={<LoginPage />} />
+            <Route path='/profile/:id' element={<ProfilePage />} />
+            <Route path='/game/:id' element={<GameInfo />} />
+            <Route path='/About' element={<AboutPage />} />
+            <Route path='/profile/edit' element={<EditProfileForm currentUser={thisuser} />} />
+          </Routes>
+        </CustomRouter>
+      </div>
     );
   }
 }
