@@ -8,7 +8,6 @@ import { deleteComment, getComments } from "../../services/commentService";
 import { Link } from "react-router-dom";
 import { getProfiles } from "../../services/profileService";
 import EditPostForm from "./EditPostForm";
-import { Table, Button } from 'react-bootstrap'
 
 interface Props {
     currentUser?: ProfileModel;
@@ -76,6 +75,7 @@ const Posts: React.FC<Props> = ({ currentUser }) => {
                 if (comment.id === post.id) {
                     deleteComment(Number(comment.id));
                 }
+                return null;
             })
             window.location.reload();
         }
@@ -103,7 +103,7 @@ const Posts: React.FC<Props> = ({ currentUser }) => {
                                 <div>
                                     {currentUser.email === email && !editForm &&
                                         <button onClick={() => toggleDrop(Number(post.id))}>
-                                            <span className="material-symbols-outlined">
+                                            <span className="material-symbols-outlined text-black">
                                                 * * *
                                             </span>
                                         </button>}

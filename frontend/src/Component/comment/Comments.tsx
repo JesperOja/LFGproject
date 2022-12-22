@@ -61,7 +61,7 @@ const Comments: React.FC<Props> = ({ post }) => {
            <div> {showComments &&
                 <div className='ml-8 h-fit'>
                     <AddComment currentUser={currentUser} thisPost={post} toggleForm={addComment} />
-                    <div className="bg-gray-200">
+                    <div className="bg-gray-200 text-gray-600">
                     {postComments.map(comment =>
                         <div key={comment.id} className='my-5 w-1/2 flex'>
                             <div>

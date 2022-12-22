@@ -1,21 +1,14 @@
 import React from "react"
-import { Link } from "react-router-dom";
-import { getAll } from "../../services/gameService";
 import { getPosts } from "../../services/postService";
 import { getProfiles } from "../../services/profileService";
 import { getUsers } from "../../services/userService";
 import { useStateValue } from "../../state/state";
 import { Comment, Post, ProfileModel, Login } from "../../types";
-import Comments from "../comment/Comments";
-import CSS from 'csstype';
 import { getComments } from "../../services/commentService";
 import Posts from "../post/Posts";
 
 const HomePage: React.FC = () => {
-    const [{ email, profile }, dispatch] = useStateValue();
-
-    
-    const thisUser = Object.values(profile).concat();
+    const [, dispatch] = useStateValue();
 
     React.useEffect(() => {
         getProfiles().then(data => {
@@ -48,20 +41,15 @@ const HomePage: React.FC = () => {
         }
     }, [dispatch]);
 
-    const contentStyle: CSS.Properties = {
-        whiteSpace: "pre-line"
-    }
-
     return (
-        <>
-            <h1 className="text-3xl font-bold underline">
-                Home Page
-            </h1>
-            <div>
-                Posts:
-                <Posts currentUser={undefined} />
+        <div className='bg-darkBackground min-h-[calc(100vh-65px)] p-10 text-gray-200'>
+            <div className='font-bold text-3xl flex w-full'>
+                <h1>Feed</h1>
+                <hr className='border-2 border-gray-300 w-full mt-5 mx-5 rounded-md'></hr>
             </div>
-        </>
+            <hr className='w-full border-gray-700 mt-5 '></hr>
+            <Posts currentUser={undefined} />
+        </div>
     )
 }
 

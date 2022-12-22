@@ -18,11 +18,28 @@ const ProfilePage: React.FC = () => {
     }
 
     return (
-        <>
-            <ProfileInfo currentUser={thisUser} />
-            <Games currentUser={thisUser} />
-            <Posts currentUser={thisUser} />
-        </>
+        <div key={thisUser.id} className='min-h-[calc(100vh-65px)] z-10 bg-darkBackground text-gray-500'>
+
+            <ProfileInfo currentUser={thisUser}/>
+
+                <div id='game-section' className='px-10 pb-10 pt-8 bg-white text-gray-600 overflow-x-auto'>
+                    <div className='font-bold text-3xl pb-7 w-full flex w-full'>
+                        <h1>Games</h1>
+                        <hr className='border-2 border-gray-300 w-full mt-5 ml-5 rounded-md'></hr>
+                    </div>
+                    <div className='flex w-fit'>
+                    <Games currentUser={thisUser} />
+                    </div>
+                </div>
+
+                <div className='px-10 py-10'>
+                <div className='font-bold text-3xl pb-7 flex w-full'>
+                    <h1 className='w-fit'>{thisUser.username}&apos;s&nbsp;Posts</h1>
+                    <hr className='border-2 border-gray-300 w-full mt-5 ml-5 rounded-md'></hr>
+                    </div>
+                <Posts currentUser={thisUser} />
+                </div>
+            </div>
     )
 }
 

@@ -118,7 +118,7 @@ const EditProfileForm: React.FC<Props> = ({ currentUser }) => {
     }
 
     return (
-        <div className="min-h-[calc(100vh-65px)] w-screen bg-darkBackground text-gray-300">
+        <div className="min-h-[calc(100vh-65px)] w-screen bg-darkBackground text-gray-600">
             <form onSubmit={handleSubmit} className="w-fit mx-auto p-10">
 
                 <div className="flex-col flex gap-y-3 w-[420px]">

@@ -5,29 +5,36 @@ interface Props {
     currentUser: ProfileModel;
 }
 
-const ProfileInfo: React.FC<Props> = ({currentUser}) => {
-
+const ProfileInfo: React.FC<Props> = ({ currentUser }) => {
+    const nameGiven = () => {
+        if (Number(currentUser.firstname?.length) > 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
     return (
-        <div id="profileInfo" >
+        <div id="profileInfo" className='flex py-10 px-10'>
             
-            <div >
+            <div className='flex w-full relative'>
 
                 <div>
-                    <div >
-                        <h1 > {currentUser.username} </h1>
-                        <h4 >( {currentUser.firstname} {currentUser.lastname} )</h4>
+                    <div className='flex h-fit'>
+                        <h1 className="text-3xl font-bold h-fit"> {currentUser.username} </h1>
+                        {nameGiven() && <h4 className="text-md capitalize font-semibold italic ml-2 h-fit my-auto">( {currentUser.firstname} {currentUser.lastname} )</h4>}
                     </div>
                     <div>
-                        <p>Age: {currentUser.age}</p>
+                        {Number(currentUser.age)< 0 && <p>Age: {currentUser.age}</p>}
                     </div>
                 </div>
 
-                <div >
-                    <div >
-                         <p>{currentUser.discord}</p>
+                <div className='ml-auto font-semibold h-fit'>
+                    <div className='flex w-fit absolute bottom-0 w-38 right-0'>
+                        <p>{currentUser.discord}</p>
                     </div>
-                    <p >Join date: {currentUser.joiningDate}</p>
+                    <p className='absolute top-0 w-38 right-0'>Join date: {currentUser.joiningDate}</p>
                 </div>
+
             </div>
         </div>
     )

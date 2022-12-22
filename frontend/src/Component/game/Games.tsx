@@ -13,15 +13,17 @@ const Games: React.FC<Props> = ({ currentUser }) => {
 
     if (myGames) {
         return (
-            <div className='flex bg-gray-300 divide-x divide-slate-200'>
+            <div className='flex'>
                 {myGames.map(game =>
-                    <div key={Number(game.id)} className="flex items-start space-x-6 p-6">
-                        <Link to={`/game/${Number(game.id)}`}><div >
-                            <h1 className='font-bold h-fit ml-[7px]'>{game.name}</h1> 
+                    <div key={Number(game.id)} className='animate__animated animate__fadeIn ring-4 hover:ring-4 hover:ring-primary hover:ring-offset-4 rounded-lg ring-darkBackground flex flex-col h-80 w-60 mx-2 relative text-white bg-darkBackground hover:bg-primary'>
+                        <Link to={`/game/${Number(game.id)}`}><div className='absolute top-0 w-full text-center py-3'>
                         </div>
-                        <div >
                             
-                            <h4 className="flex-none w-full mt-2 font-normal ml-[7px]">{game.hours} Hours</h4>
+                            <div className='pb-2 h-[140px] w-full absolute bottom-0 bg-gradient-to-t from-darkBackground via-darkBackground rounded-b-lg'>
+                                <div className='mt-auto absolute bottom-0 w-[90%] mx-[5%] mb-2'>
+                                    <h1 className='text-xl font-semibold border-b pb-1 text-center'>{game.name}</h1>
+                                    <h2 className='text-lg italic font-semibold text-center'>{game.hours} Hours</h2>
+                                </div>
                         </div></Link>
                     </div>
                 )}

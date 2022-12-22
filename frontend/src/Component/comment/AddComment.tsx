@@ -71,7 +71,7 @@ const AddComment: React.FC<Props> = ({thisPost, currentUser, toggleForm}) => {
                 <div className='w-fit ml-20'>
                     {showCommentButton &&
                         <>
-                            <button onClick={deactivateTextAreaChange} className='uppercase rounded-full text-sm px-3 py-2 hover:text-white hover:bg-gray-500'>Cancel</button>
+                            <button onClick={deactivateTextAreaChange} className='uppercase rounded-full text-gray-600 px-3 py-2 hover:text-white hover:bg-gray-500'>Cancel</button>
                             <button type='submit' className='uppercase rounded-full bg-primary text-sm px-3 py-2 hover:ring-4'>Comment</button>
                         </>
                     }
