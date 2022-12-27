@@ -1,7 +1,7 @@
 import axios from "axios";
 import { ProfileModel } from "../types";
 
-const baseUrl = "/api/profile";
+const baseUrl = "https://lfg.fly.dev/api/profile";
 //const baseUrl = "http://localhost:3001/api/profile";
 
 export const addProfile = async (profile: ProfileModel) => {

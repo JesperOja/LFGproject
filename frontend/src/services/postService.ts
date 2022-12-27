@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Post } from "../types";
 
-const baseUrl = "/api/post";
+const baseUrl = "https://lfg.fly.dev/api/post";
 //const baseUrl = "http://localhost:3001/api/post";
 
 export const getPosts = async () => {

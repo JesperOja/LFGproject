@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Game } from "../types"
 
-const baseUrl = "/api/game";
+const baseUrl = "https://lfg.fly.dev/api/game";
 //const baseUrl = "http://localhost:3001/api/game";
 
 export const getAll = async () => {

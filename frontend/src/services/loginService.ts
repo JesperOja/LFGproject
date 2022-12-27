@@ -2,7 +2,7 @@ import axios from "axios";
 import { Login } from "../types";
 
 //const Url = "http://localhost:3001/api/user";
-const Url = "/api/user";
+const Url = "https://lfg.fly.dev/api/user";
 
 
 

@@ -2,7 +2,7 @@ import axios from "axios";
 import { Comment } from "../types";
 
 //const baseUrl = "http://localhost:3001/api/comment";
-const baseUrl = "/api/comment";
+const baseUrl = "https://lfg.fly.dev/api/comment";
 
 export const getComments = async () => {
     try {
