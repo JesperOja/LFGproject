@@ -1,0 +1,29 @@
+#Look For Group User Guide
+##New user
+1. Create account by clicking register button in login page.
+2. Fill info you want
+    2.1. Email, Password, Confirm Password, Username are mandatory
+    2.2. Rest is optional
+3. When you are ready with the form, press register button and you will be directed back to login screen
+4. Now you can log in using your email and password
+5. After successful login, you are now on Feed -page, where you see everyones posts in order, newest on top.
+6. You can comment everyones posts and hit like/dislike buttons on posts. But you cannot like/dislike your own posts
+7. By clicking profile on Nav bar, you can go to your profile page
+8. You can change your profile info, add games and then edit/delete them or make posts and edit/delete them.
+    8.1. Creating new game:
+        8.1.1 Click + -button under Games.
+        8.1.2 You can give name, hours played, rank(if competive game), server(if there is different ones), nickname ingame and your comments about the game or anything.
+        8.1.3 Clicking add game button will take you back to your profile where you see your just added game in your list
+    8.2. Editing game:
+        8.2.1 By clicking game in your profile page or other user profile pages, will take you to that games info site.
+        8.2.2 If it's your game, you can edit or delete them at any time.
+        8.2.3 Any changes made to your game will be updated instantly
+    8.3 Creating post:
+        8.3.1 By clicking New Post button, you can make new post
+        8.3.2 Post has to have title and content.
+        8.3.3 Posts you make will appear in your profile page and in feed page instantly, newest post first
+    8.4 Editing post:
+        8.4.1 You can edit or delete your post by clicking *** -button in your profile page Your Posts section
+        8.4.2 Editing done to your post will be updated instantly
+9. By clicking post poster username or comment posters username, you can visit their profile page
+10. There will hopefully be more things to do later on, like communities for every game, friend list, personalized feed(shows only your and your friends)
