@@ -1,8 +1,8 @@
 import axios from "axios";
 import { Post } from "../types";
 
-//const baseUrl = "https://immense-cove-02108.herokuapp.com/api/Post";
-const baseUrl = "http://localhost:3001/api/post";
+const baseUrl = "/api/post";
+//const baseUrl = "http://localhost:3001/api/post";
 
 export const getPosts = async () => {
     try{

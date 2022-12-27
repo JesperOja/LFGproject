@@ -6,13 +6,14 @@ import postRouter from './routes/post';
 import gameRouter from './routes/game';
 import commentRouter from './routes/comment';
 
-const { connectToDatabase } = require('./util/db')
+import { connectToDatabase } from './util/db';
 
 require('dotenv').config()
 
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use(express.static('build'));
 
 app.use('/api/profile', profileRouter);
 app.use('/api/user', userRouter);

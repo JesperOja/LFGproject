@@ -42,6 +42,8 @@ bld/
 Generated\ Files/
 
 /frontend/build
+/backend/build
+/backend/dist
 # MSTest test Results
 [Tt]est[Rr]esult*/
 [Bb]uild[Ll]og.*

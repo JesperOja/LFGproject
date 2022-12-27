@@ -1,8 +1,8 @@
 import axios from "axios";
 import { Game } from "../types"
 
-//const baseUrl = "https://immense-cove-02108.herokuapp.com/api/Game";
-const baseUrl = "http://localhost:3001/api/game";
+const baseUrl = "/api/game";
+//const baseUrl = "http://localhost:3001/api/game";
 
 export const getAll = async () => {
 	try {
@@ -31,22 +31,6 @@ export const addGame = async (game: Game) => {
 		console.error(errorMessage);
 	}
 }
-
-/*
-export const getMyGames = async (id: number) => {
-	try{
-		const {data: data} = await axios.get<Game[]>(`${baseUrl}/${id}`);
-		return data;
-
-	}catch (error: unknown) {
-		let errorMessage = 'Something went wrong.'
-		if (axios.isAxiosError(error) && error.response) {
-			errorMessage += ' Error: ' + error.response.data;
-		}
-		console.error(errorMessage);
-	}
-}
-*/
 
 export const editGame = async (game: Game) => {
 	try {

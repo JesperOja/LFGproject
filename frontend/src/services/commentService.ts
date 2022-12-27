@@ -1,7 +1,8 @@
 import axios from "axios";
 import { Comment } from "../types";
 
-const baseUrl = "http://localhost:3001/api/comment";
+//const baseUrl = "http://localhost:3001/api/comment";
+const baseUrl = "/api/comment";
 
 export const getComments = async () => {
     try {

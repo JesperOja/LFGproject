@@ -1,8 +1,8 @@
 import axios from "axios";
 import { Login } from "../types";
 
-//const baseUrl = "https://immense-cove-02108.herokuapp.com/api/User";
-const baseUrl = "http://localhost:3001/api/user";
+const baseUrl = "/api/user";
+//const baseUrl = "http://localhost:3001/api/user";
 
 export const getUsers = async () => {
     try {

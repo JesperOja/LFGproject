@@ -1,8 +1,8 @@
 import axios from "axios";
 import { ProfileModel } from "../types";
 
-//const baseUrl = "https://immense-cove-02108.herokuapp.com/api/Profiles";
-const baseUrl = "http://localhost:3001/api/profile";
+const baseUrl = "/api/profile";
+//const baseUrl = "http://localhost:3001/api/profile";
 
 export const addProfile = async (profile: ProfileModel) => {
     try{
